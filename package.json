@@ -1,0 +1,24 @@
+{
+  "name": "ecopersona-ai",
+  "version": "1.0.0",
+  "description": "",
+  "main": "script.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Ashish200408/EcoPersona-AI.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/Ashish200408/EcoPersona-AI/issues"
+  },
+  "homepage": "https://github.com/Ashish200408/EcoPersona-AI#readme",
+  "devDependencies": {
+    "puppeteer": "^25.1.0"
+  }
+}

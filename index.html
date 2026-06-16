@@ -783,6 +783,535 @@
   <!-- Mobile sidebar overlay -->
   <div class="sidebar-overlay" id="sidebar-overlay" aria-hidden="true"></div>
 
+  <!-- ══════════════════════════════════════════
+       LIFESTYLE DNA ASSESSMENT MODULE
+  ══════════════════════════════════════════ -->
+  <div id="assessment-view"
+       class="module-view"
+       role="dialog"
+       aria-modal="true"
+       aria-hidden="true"
+       aria-labelledby="assess-dialog-title">
+
+    <div class="assess-shell">
+
+      <!-- ─── HEADER ─── -->
+      <header class="assess-header">
+
+        <button class="assess-icon-btn" id="assess-back"
+          aria-label="Go to previous step" disabled>
+          <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5M12 5l-7 7 7 7"/></svg>
+          <span class="assess-btn-text">Back</span>
+        </button>
+
+        <div class="assess-progress-wrap" aria-label="Assessment progress">
+          <div class="assess-step-dots" id="assess-step-dots" aria-hidden="true">
+            <!-- 5 dots built by JS -->
+          </div>
+          <div class="assess-progress-track">
+            <div class="assess-progress-bar"
+                 id="assess-progress-bar"
+                 role="progressbar"
+                 aria-label="Assessment progress"
+                 aria-valuemin="0"
+                 aria-valuemax="100"
+                 aria-valuenow="0">
+              <div class="assess-progress-fill" id="assess-progress-fill"></div>
+            </div>
+          </div>
+          <span class="assess-step-label" id="assess-step-label"
+            aria-live="polite" aria-atomic="true">Introduction</span>
+        </div>
+
+        <button class="assess-icon-btn assess-icon-btn--close" id="assess-close"
+          aria-label="Close assessment and return to dashboard">
+          <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+        </button>
+
+      </header><!-- end assess-header -->
+
+      <!-- ─── SCROLLABLE STEP AREA ─── -->
+      <main class="assess-main" id="assess-main" tabindex="-1">
+
+        <!-- ────────────────────────────────
+             STEP 0 — Introduction / Welcome
+        ──────────────────────────────────── -->
+        <section class="assess-step is-active"
+                 id="assess-step-0" data-step="0"
+                 aria-labelledby="assess-dialog-title"
+                 aria-hidden="false">
+          <div class="assess-intro">
+            <div class="intro-glow" aria-hidden="true"></div>
+            <div class="intro-icon" aria-hidden="true">🧬</div>
+            <h1 class="assess-intro-title" id="assess-dialog-title">
+              Discover Your<br>
+              <span class="gradient-text">Eco DNA</span>
+            </h1>
+            <p class="assess-intro-body">
+              Answer 5 quick questions about your lifestyle habits. We'll calculate your personal carbon footprint profile and match you to an Eco Persona.
+            </p>
+            <ul class="intro-features" role="list">
+              <li role="listitem">
+                <span class="intro-feat-icon" aria-hidden="true">⚡</span>
+                <span>Takes only 2 minutes</span>
+              </li>
+              <li role="listitem">
+                <span class="intro-feat-icon" aria-hidden="true">🔒</span>
+                <span>All data stays on your device</span>
+              </li>
+              <li role="listitem">
+                <span class="intro-feat-icon" aria-hidden="true">🎯</span>
+                <span>Get a personalised action plan</span>
+              </li>
+            </ul>
+            <div class="prev-result" id="prev-result" hidden>
+              <span class="prev-result-badge">Your last result:</span>
+              <span class="prev-result-persona" id="prev-result-persona">—</span>
+              <button class="btn-link" id="retake-from-intro">Retake</button>
+            </div>
+          </div>
+        </section>
+
+        <!-- ────────────────────────────────
+             STEP 1 — Transportation
+        ──────────────────────────────────── -->
+        <section class="assess-step"
+                 id="assess-step-1" data-step="1"
+                 aria-labelledby="step1-heading"
+                 aria-hidden="true">
+          <div class="assess-q-wrap">
+            <div class="assess-step-badge" aria-hidden="true">1 / 5</div>
+            <h2 class="assess-q-title" id="step1-heading">How do you primarily get around?</h2>
+            <p class="assess-q-sub">Choose your most frequent mode of daily transport</p>
+
+            <fieldset class="option-fieldset" id="fieldset-transport">
+              <legend class="sr-only">Transportation mode — required, choose one</legend>
+              <div class="option-grid">
+
+                <label class="option-card" for="opt-car">
+                  <input class="option-input" type="radio" id="opt-car" name="transport" value="car" aria-describedby="opt-car-impact">
+                  <div class="option-card-inner">
+                    <div class="option-icon-wrap" aria-hidden="true"><span class="option-emoji">🚗</span></div>
+                    <div class="option-text-wrap">
+                      <span class="option-name">Private Car</span>
+                      <span class="option-desc">Daily driving as main mode</span>
+                    </div>
+                    <span class="option-check-mark" aria-hidden="true">
+                      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                    </span>
+                    <span class="option-impact-tag" id="opt-car-impact" aria-label="High carbon impact">High CO₂</span>
+                  </div>
+                </label>
+
+                <label class="option-card" for="opt-bike">
+                  <input class="option-input" type="radio" id="opt-bike" name="transport" value="bike" aria-describedby="opt-bike-impact">
+                  <div class="option-card-inner">
+                    <div class="option-icon-wrap" aria-hidden="true"><span class="option-emoji">🚴</span></div>
+                    <div class="option-text-wrap">
+                      <span class="option-name">Bicycle</span>
+                      <span class="option-desc">Cycling for daily commuting</span>
+                    </div>
+                    <span class="option-check-mark" aria-hidden="true">
+                      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                    </span>
+                    <span class="option-impact-tag option-impact-tag--low" id="opt-bike-impact" aria-label="Zero carbon impact">Zero CO₂</span>
+                  </div>
+                </label>
+
+                <label class="option-card" for="opt-public">
+                  <input class="option-input" type="radio" id="opt-public" name="transport" value="public" aria-describedby="opt-public-impact">
+                  <div class="option-card-inner">
+                    <div class="option-icon-wrap" aria-hidden="true"><span class="option-emoji">🚌</span></div>
+                    <div class="option-text-wrap">
+                      <span class="option-name">Public Transit</span>
+                      <span class="option-desc">Bus, metro or train daily</span>
+                    </div>
+                    <span class="option-check-mark" aria-hidden="true">
+                      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                    </span>
+                    <span class="option-impact-tag option-impact-tag--med" id="opt-public-impact" aria-label="Low carbon impact">Low CO₂</span>
+                  </div>
+                </label>
+
+              </div>
+              <p class="field-error" id="error-transport" role="alert" aria-live="assertive" hidden>
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+                Please select an option to continue.
+              </p>
+            </fieldset>
+          </div>
+        </section>
+
+        <!-- ────────────────────────────────
+             STEP 2 — Food Habits
+        ──────────────────────────────────── -->
+        <section class="assess-step"
+                 id="assess-step-2" data-step="2"
+                 aria-labelledby="step2-heading"
+                 aria-hidden="true">
+          <div class="assess-q-wrap">
+            <div class="assess-step-badge" aria-hidden="true">2 / 5</div>
+            <h2 class="assess-q-title" id="step2-heading">What best describes your diet?</h2>
+            <p class="assess-q-sub">Food production is one of the biggest sources of carbon emissions</p>
+
+            <fieldset class="option-fieldset" id="fieldset-food">
+              <legend class="sr-only">Food diet — required, choose one</legend>
+              <div class="option-grid">
+
+                <label class="option-card" for="opt-vegetarian">
+                  <input class="option-input" type="radio" id="opt-vegetarian" name="food" value="vegetarian" aria-describedby="opt-veg-impact">
+                  <div class="option-card-inner">
+                    <div class="option-icon-wrap" aria-hidden="true"><span class="option-emoji">🥦</span></div>
+                    <div class="option-text-wrap">
+                      <span class="option-name">Vegetarian</span>
+                      <span class="option-desc">Plant-based, no meat</span>
+                    </div>
+                    <span class="option-check-mark" aria-hidden="true">
+                      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                    </span>
+                    <span class="option-impact-tag option-impact-tag--low" id="opt-veg-impact">Low CO₂</span>
+                  </div>
+                </label>
+
+                <label class="option-card" for="opt-mixed">
+                  <input class="option-input" type="radio" id="opt-mixed" name="food" value="mixed" aria-describedby="opt-mixed-impact">
+                  <div class="option-card-inner">
+                    <div class="option-icon-wrap" aria-hidden="true"><span class="option-emoji">🍱</span></div>
+                    <div class="option-text-wrap">
+                      <span class="option-name">Mixed Diet</span>
+                      <span class="option-desc">Balanced with occasional meat</span>
+                    </div>
+                    <span class="option-check-mark" aria-hidden="true">
+                      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                    </span>
+                    <span class="option-impact-tag option-impact-tag--med" id="opt-mixed-impact">Med CO₂</span>
+                  </div>
+                </label>
+
+                <label class="option-card" for="opt-nonveg">
+                  <input class="option-input" type="radio" id="opt-nonveg" name="food" value="nonvegetarian" aria-describedby="opt-nonveg-impact">
+                  <div class="option-card-inner">
+                    <div class="option-icon-wrap" aria-hidden="true"><span class="option-emoji">🥩</span></div>
+                    <div class="option-text-wrap">
+                      <span class="option-name">Non-Vegetarian</span>
+                      <span class="option-desc">Regular meat consumption</span>
+                    </div>
+                    <span class="option-check-mark" aria-hidden="true">
+                      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                    </span>
+                    <span class="option-impact-tag" id="opt-nonveg-impact">High CO₂</span>
+                  </div>
+                </label>
+
+              </div>
+              <p class="field-error" id="error-food" role="alert" aria-live="assertive" hidden>
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+                Please select an option to continue.
+              </p>
+            </fieldset>
+          </div>
+        </section>
+
+        <!-- ────────────────────────────────
+             STEP 3 — Home Electricity
+        ──────────────────────────────────── -->
+        <section class="assess-step"
+                 id="assess-step-3" data-step="3"
+                 aria-labelledby="step3-heading"
+                 aria-hidden="true">
+          <div class="assess-q-wrap">
+            <div class="assess-step-badge" aria-hidden="true">3 / 5</div>
+            <h2 class="assess-q-title" id="step3-heading">How much electricity does your home use?</h2>
+            <p class="assess-q-sub">Consider lighting, appliances, heating and cooling</p>
+
+            <fieldset class="option-fieldset" id="fieldset-electricity">
+              <legend class="sr-only">Home electricity usage — required, choose one</legend>
+              <div class="option-grid">
+
+                <label class="option-card" for="opt-elec-low">
+                  <input class="option-input" type="radio" id="opt-elec-low" name="electricity" value="low" aria-describedby="opt-elec-low-impact">
+                  <div class="option-card-inner">
+                    <div class="option-icon-wrap" aria-hidden="true"><span class="option-emoji">💡</span></div>
+                    <div class="option-text-wrap">
+                      <span class="option-name">Low Usage</span>
+                      <span class="option-desc">LED lights, minimal appliances</span>
+                    </div>
+                    <span class="option-check-mark" aria-hidden="true">
+                      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                    </span>
+                    <span class="option-impact-tag option-impact-tag--low" id="opt-elec-low-impact">Low CO₂</span>
+                  </div>
+                </label>
+
+                <label class="option-card" for="opt-elec-med">
+                  <input class="option-input" type="radio" id="opt-elec-med" name="electricity" value="medium" aria-describedby="opt-elec-med-impact">
+                  <div class="option-card-inner">
+                    <div class="option-icon-wrap" aria-hidden="true"><span class="option-emoji">🏠</span></div>
+                    <div class="option-text-wrap">
+                      <span class="option-name">Medium Usage</span>
+                      <span class="option-desc">Average household consumption</span>
+                    </div>
+                    <span class="option-check-mark" aria-hidden="true">
+                      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                    </span>
+                    <span class="option-impact-tag option-impact-tag--med" id="opt-elec-med-impact">Med CO₂</span>
+                  </div>
+                </label>
+
+                <label class="option-card" for="opt-elec-high">
+                  <input class="option-input" type="radio" id="opt-elec-high" name="electricity" value="high" aria-describedby="opt-elec-high-impact">
+                  <div class="option-card-inner">
+                    <div class="option-icon-wrap" aria-hidden="true"><span class="option-emoji">🔌</span></div>
+                    <div class="option-text-wrap">
+                      <span class="option-name">High Usage</span>
+                      <span class="option-desc">Heavy appliance or AC use</span>
+                    </div>
+                    <span class="option-check-mark" aria-hidden="true">
+                      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                    </span>
+                    <span class="option-impact-tag" id="opt-elec-high-impact">High CO₂</span>
+                  </div>
+                </label>
+
+              </div>
+              <p class="field-error" id="error-electricity" role="alert" aria-live="assertive" hidden>
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+                Please select an option to continue.
+              </p>
+            </fieldset>
+          </div>
+        </section>
+
+        <!-- ────────────────────────────────
+             STEP 4 — Shopping Habits
+        ──────────────────────────────────── -->
+        <section class="assess-step"
+                 id="assess-step-4" data-step="4"
+                 aria-labelledby="step4-heading"
+                 aria-hidden="true">
+          <div class="assess-q-wrap">
+            <div class="assess-step-badge" aria-hidden="true">4 / 5</div>
+            <h2 class="assess-q-title" id="step4-heading">How would you describe your shopping habits?</h2>
+            <p class="assess-q-sub">Consumer goods account for up to 45% of global carbon emissions</p>
+
+            <fieldset class="option-fieldset" id="fieldset-shopping">
+              <legend class="sr-only">Shopping habits — required, choose one</legend>
+              <div class="option-grid">
+
+                <label class="option-card" for="opt-shop-low">
+                  <input class="option-input" type="radio" id="opt-shop-low" name="shopping" value="low" aria-describedby="opt-shop-low-impact">
+                  <div class="option-card-inner">
+                    <div class="option-icon-wrap" aria-hidden="true"><span class="option-emoji">♻️</span></div>
+                    <div class="option-text-wrap">
+                      <span class="option-name">Minimal</span>
+                      <span class="option-desc">Buy only necessities, prefer secondhand</span>
+                    </div>
+                    <span class="option-check-mark" aria-hidden="true">
+                      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                    </span>
+                    <span class="option-impact-tag option-impact-tag--low" id="opt-shop-low-impact">Low CO₂</span>
+                  </div>
+                </label>
+
+                <label class="option-card" for="opt-shop-med">
+                  <input class="option-input" type="radio" id="opt-shop-med" name="shopping" value="medium" aria-describedby="opt-shop-med-impact">
+                  <div class="option-card-inner">
+                    <div class="option-icon-wrap" aria-hidden="true"><span class="option-emoji">🛒</span></div>
+                    <div class="option-text-wrap">
+                      <span class="option-name">Moderate</span>
+                      <span class="option-desc">Occasional new purchases</span>
+                    </div>
+                    <span class="option-check-mark" aria-hidden="true">
+                      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                    </span>
+                    <span class="option-impact-tag option-impact-tag--med" id="opt-shop-med-impact">Med CO₂</span>
+                  </div>
+                </label>
+
+                <label class="option-card" for="opt-shop-high">
+                  <input class="option-input" type="radio" id="opt-shop-high" name="shopping" value="high" aria-describedby="opt-shop-high-impact">
+                  <div class="option-card-inner">
+                    <div class="option-icon-wrap" aria-hidden="true"><span class="option-emoji">💳</span></div>
+                    <div class="option-text-wrap">
+                      <span class="option-name">Heavy Shopper</span>
+                      <span class="option-desc">Frequent new purchases, fast fashion</span>
+                    </div>
+                    <span class="option-check-mark" aria-hidden="true">
+                      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                    </span>
+                    <span class="option-impact-tag" id="opt-shop-high-impact">High CO₂</span>
+                  </div>
+                </label>
+
+              </div>
+              <p class="field-error" id="error-shopping" role="alert" aria-live="assertive" hidden>
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+                Please select an option to continue.
+              </p>
+            </fieldset>
+          </div>
+        </section>
+
+        <!-- ────────────────────────────────
+             STEP 5 — Waste Management
+        ──────────────────────────────────── -->
+        <section class="assess-step"
+                 id="assess-step-5" data-step="5"
+                 aria-labelledby="step5-heading"
+                 aria-hidden="true">
+          <div class="assess-q-wrap">
+            <div class="assess-step-badge" aria-hidden="true">5 / 5</div>
+            <h2 class="assess-q-title" id="step5-heading">How do you handle household waste?</h2>
+            <p class="assess-q-sub">Landfill waste produces methane — a potent greenhouse gas</p>
+
+            <fieldset class="option-fieldset" id="fieldset-waste">
+              <legend class="sr-only">Waste management habits — required, choose one</legend>
+              <div class="option-grid">
+
+                <label class="option-card" for="opt-waste-low">
+                  <input class="option-input" type="radio" id="opt-waste-low" name="waste" value="low" aria-describedby="opt-waste-low-impact">
+                  <div class="option-card-inner">
+                    <div class="option-icon-wrap" aria-hidden="true"><span class="option-emoji">🌱</span></div>
+                    <div class="option-text-wrap">
+                      <span class="option-name">Low Waste</span>
+                      <span class="option-desc">Actively recycles &amp; composts</span>
+                    </div>
+                    <span class="option-check-mark" aria-hidden="true">
+                      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                    </span>
+                    <span class="option-impact-tag option-impact-tag--low" id="opt-waste-low-impact">Low CO₂</span>
+                  </div>
+                </label>
+
+                <label class="option-card" for="opt-waste-med">
+                  <input class="option-input" type="radio" id="opt-waste-med" name="waste" value="medium" aria-describedby="opt-waste-med-impact">
+                  <div class="option-card-inner">
+                    <div class="option-icon-wrap" aria-hidden="true"><span class="option-emoji">🗑️</span></div>
+                    <div class="option-text-wrap">
+                      <span class="option-name">Average Waste</span>
+                      <span class="option-desc">Some recycling, average output</span>
+                    </div>
+                    <span class="option-check-mark" aria-hidden="true">
+                      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                    </span>
+                    <span class="option-impact-tag option-impact-tag--med" id="opt-waste-med-impact">Med CO₂</span>
+                  </div>
+                </label>
+
+                <label class="option-card" for="opt-waste-high">
+                  <input class="option-input" type="radio" id="opt-waste-high" name="waste" value="high" aria-describedby="opt-waste-high-impact">
+                  <div class="option-card-inner">
+                    <div class="option-icon-wrap" aria-hidden="true"><span class="option-emoji">🔥</span></div>
+                    <div class="option-text-wrap">
+                      <span class="option-name">High Waste</span>
+                      <span class="option-desc">Minimal recycling, high landfill</span>
+                    </div>
+                    <span class="option-check-mark" aria-hidden="true">
+                      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                    </span>
+                    <span class="option-impact-tag" id="opt-waste-high-impact">High CO₂</span>
+                  </div>
+                </label>
+
+              </div>
+              <p class="field-error" id="error-waste" role="alert" aria-live="assertive" hidden>
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+                Please select an option to continue.
+              </p>
+            </fieldset>
+          </div>
+        </section>
+
+        <!-- ────────────────────────────────
+             STEP 6 — Results / Persona
+        ──────────────────────────────────── -->
+        <section class="assess-step"
+                 id="assess-step-results" data-step="6"
+                 aria-labelledby="results-heading"
+                 aria-hidden="true">
+          <div class="assess-results">
+
+            <!-- Persona Card -->
+            <div class="persona-reveal" aria-label="Your Eco Persona result">
+              <div class="persona-emoji-wrap" id="results-emoji" aria-hidden="true">🏆</div>
+              <h2 class="results-heading" id="results-heading">Your Eco Persona</h2>
+              <div class="persona-card" id="persona-card">
+                <span class="persona-name" id="persona-name">Carbon Champion</span>
+                <p class="persona-headline" id="persona-headline">You're leading the way!</p>
+                <p class="persona-desc" id="persona-desc">Loading your results…</p>
+              </div>
+            </div>
+
+            <!-- Score Bar -->
+            <div class="results-score-section">
+              <div class="results-score-row">
+                <span class="results-score-lbl">Carbon Impact Score</span>
+                <span class="results-score-num" id="results-score-num" aria-live="polite">— / 15</span>
+              </div>
+              <div class="results-score-bar-wrap"
+                   role="progressbar"
+                   aria-label="Carbon impact score"
+                   aria-valuemin="5"
+                   aria-valuemax="15"
+                   id="results-score-bar-el">
+                <div class="results-score-fill" id="results-score-fill"></div>
+              </div>
+              <div class="results-score-legend" aria-hidden="true">
+                <span>🌿 Low Impact</span>
+                <span>🔥 High Impact</span>
+              </div>
+            </div>
+
+            <!-- Category Breakdown -->
+            <div class="results-breakdown">
+              <h3 class="results-section-title">Category Breakdown</h3>
+              <div class="results-bk-grid" id="results-bk-grid" aria-label="Your score by category">
+                <!-- Populated by JS -->
+              </div>
+            </div>
+
+            <!-- Recommendations -->
+            <div class="results-tips">
+              <h3 class="results-section-title">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                Top Recommendations for You
+              </h3>
+              <ul class="tips-list" id="results-tips-list" role="list">
+                <!-- Populated by JS -->
+              </ul>
+            </div>
+
+            <!-- Action Buttons -->
+            <div class="results-actions" role="group" aria-label="Assessment next steps">
+              <button class="btn btn--primary" id="results-save-btn">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 21H5a2 2 0 01-2-2V5a2 2 0 012-2h11l5 5v11a2 2 0 01-2 2z"/><polyline points="17 21 17 13 7 13 7 21"/><polyline points="7 3 7 8 15 8"/></svg>
+                Save My Profile
+              </button>
+              <button class="btn btn--ghost" id="results-retake-btn">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="23 4 23 10 17 10"/><path d="M20.49 15a9 9 0 11-2.12-9.36L23 10"/></svg>
+                Retake Assessment
+              </button>
+            </div>
+
+          </div>
+        </section>
+
+      </main><!-- end assess-main -->
+
+      <!-- ─── FOOTER NAVIGATION ─── -->
+      <footer class="assess-footer" id="assess-footer">
+        <button class="btn btn--ghost" id="assess-skip" aria-label="Skip this question">
+          Skip
+        </button>
+        <button class="btn btn--primary" id="assess-next">
+          Start Assessment
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </button>
+      </footer>
+
+    </div><!-- end assess-shell -->
+  </div><!-- end assessment-view -->
+
   <script src="script.js"></script>
 </body>
 </html>
