@@ -1,0 +1,788 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="EcoPersona AI — Track and reduce your carbon footprint with personalized insights, AI-powered recommendations, and real-time impact visualization." />
+  <meta name="theme-color" content="#0D1117" />
+  <meta property="og:title" content="EcoPersona AI — Home Dashboard" />
+  <meta property="og:description" content="Your personal carbon footprint tracker powered by AI." />
+  <title>EcoPersona AI — Home Dashboard</title>
+
+  <!-- Preconnect for performance -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+
+  <!-- Typography: Outfit (display) + Inter (body) + JetBrains Mono (data) -->
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet" />
+
+  <!-- Chart.js -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js" defer></script>
+
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- ══════════════════════════════════════════
+       ACCESSIBILITY: SKIP LINK & LIVE REGIONS
+  ══════════════════════════════════════════ -->
+  <a href="#main-content" class="skip-link">Skip to main content</a>
+  <div id="aria-announcer" role="status" aria-live="polite" aria-atomic="true" class="sr-only"></div>
+
+  <!-- ══════════════════════════════════════════
+       APP SHELL
+  ══════════════════════════════════════════ -->
+  <div class="app-shell" id="app-shell">
+
+    <!-- ══════ SIDEBAR NAVIGATION ══════ -->
+    <nav class="sidebar" id="sidebar" aria-label="Main navigation">
+
+      <!-- Logo & Collapse Toggle -->
+      <div class="sidebar-logo">
+        <div class="logo-icon" aria-hidden="true">
+          <svg width="30" height="30" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="15" cy="15" r="13" stroke="url(#lg1)" stroke-width="2"/>
+            <path d="M15 5C11 5 8 8.5 8 12c0 5 7 15 7 15s7-10 7-15c0-3.5-3-7-7-7z" fill="url(#lg1)"/>
+            <defs>
+              <linearGradient id="lg1" x1="0" y1="0" x2="30" y2="30">
+                <stop offset="0%" stop-color="hsl(142,71%,58%)"/>
+                <stop offset="100%" stop-color="hsl(191,91%,52%)"/>
+              </linearGradient>
+            </defs>
+          </svg>
+        </div>
+        <span class="logo-wordmark" aria-label="EcoPersona AI">EcoPersona<span class="logo-ai">AI</span></span>
+        <button class="sidebar-toggle" id="sidebar-toggle"
+          aria-label="Collapse navigation"
+          aria-expanded="true"
+          aria-controls="sidebar">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true">
+            <path d="M10 3L5 8l5 5"/>
+          </svg>
+        </button>
+      </div>
+
+      <!-- Navigation Items -->
+      <div class="sidebar-nav" role="list">
+
+        <!-- Overview Group -->
+        <div class="nav-group">
+          <span class="nav-group-label" aria-hidden="true">Overview</span>
+
+          <a href="#dashboard" class="nav-item active" role="listitem" data-module="dashboard" aria-current="page" tabindex="0">
+            <span class="nav-icon" aria-hidden="true">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/>
+                <rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/>
+              </svg>
+            </span>
+            <span class="nav-label">Dashboard</span>
+          </a>
+
+          <a href="#progress" class="nav-item" role="listitem" data-module="progress" tabindex="0">
+            <span class="nav-icon" aria-hidden="true">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="22,12 18,12 15,21 9,3 6,12 2,12"/>
+              </svg>
+            </span>
+            <span class="nav-label">Progress Tracking</span>
+          </a>
+
+          <a href="#projection" class="nav-item" role="listitem" data-module="projection" tabindex="0">
+            <span class="nav-icon" aria-hidden="true">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M3 20l4-8 4 4 4-6 4 3"/><polyline points="16 8 20 8 20 12"/>
+              </svg>
+            </span>
+            <span class="nav-label">Future Projections</span>
+          </a>
+        </div>
+
+        <!-- Measure Group -->
+        <div class="nav-group">
+          <span class="nav-group-label" aria-hidden="true">Measure</span>
+
+          <a href="#assessment" class="nav-item" role="listitem" data-module="assessment" tabindex="0">
+            <span class="nav-icon" aria-hidden="true">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"/>
+              </svg>
+            </span>
+            <span class="nav-label">Lifestyle DNA</span>
+            <span class="nav-pill" aria-label="New feature">New</span>
+          </a>
+
+          <a href="#calculator" class="nav-item" role="listitem" data-module="calculator" tabindex="0">
+            <span class="nav-icon" aria-hidden="true">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="4" y="2" width="16" height="20" rx="2"/>
+                <line x1="8" y1="6" x2="16" y2="6"/>
+                <line x1="8" y1="10" x2="10" y2="10"/><line x1="12" y1="10" x2="14" y2="10"/><line x1="16" y1="10" x2="16" y2="10"/>
+                <line x1="8" y1="14" x2="10" y2="14"/><line x1="12" y1="14" x2="14" y2="14"/><line x1="16" y1="14" x2="16" y2="14"/>
+              </svg>
+            </span>
+            <span class="nav-label">Carbon Calculator</span>
+          </a>
+        </div>
+
+        <!-- Learn & Act Group -->
+        <div class="nav-group">
+          <span class="nav-group-label" aria-hidden="true">Learn &amp; Act</span>
+
+          <a href="#awareness" class="nav-item" role="listitem" data-module="awareness" tabindex="0">
+            <span class="nav-icon" aria-hidden="true">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/>
+              </svg>
+            </span>
+            <span class="nav-label">Awareness Engine</span>
+          </a>
+
+          <a href="#roadmap" class="nav-item" role="listitem" data-module="roadmap" tabindex="0">
+            <span class="nav-icon" aria-hidden="true">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="5" cy="6" r="1.5" fill="currentColor"/><line x1="6.5" y1="6" x2="20" y2="6"/>
+                <circle cx="19" cy="12" r="1.5" fill="currentColor"/><line x1="4" y1="12" x2="17.5" y2="12"/>
+                <circle cx="5" cy="18" r="1.5" fill="currentColor"/><line x1="6.5" y1="18" x2="20" y2="18"/>
+              </svg>
+            </span>
+            <span class="nav-label">AI Roadmap</span>
+          </a>
+
+          <a href="#simulator" class="nav-item" role="listitem" data-module="simulator" tabindex="0">
+            <span class="nav-icon" aria-hidden="true">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/>
+              </svg>
+            </span>
+            <span class="nav-label">Reality Simulator</span>
+          </a>
+        </div>
+
+        <!-- Engage Group -->
+        <div class="nav-group">
+          <span class="nav-group-label" aria-hidden="true">Engage</span>
+
+          <a href="#challenges" class="nav-item" role="listitem" data-module="challenges" tabindex="0">
+            <span class="nav-icon" aria-hidden="true">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+              </svg>
+            </span>
+            <span class="nav-label">Eco Challenges</span>
+            <span class="nav-pill nav-pill--warning" aria-label="3 active challenges">3</span>
+          </a>
+
+          <a href="#quiz" class="nav-item" role="listitem" data-module="quiz" tabindex="0">
+            <span class="nav-icon" aria-hidden="true">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M9.09 9a3 3 0 015.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/><circle cx="12" cy="12" r="10"/>
+              </svg>
+            </span>
+            <span class="nav-label">Carbon Quiz</span>
+          </a>
+
+          <a href="#visualization" class="nav-item" role="listitem" data-module="visualization" tabindex="0">
+            <span class="nav-icon" aria-hidden="true">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/>
+              </svg>
+            </span>
+            <span class="nav-label">Impact Visualization</span>
+          </a>
+        </div>
+
+      </div><!-- end sidebar-nav -->
+
+      <!-- User Profile Footer -->
+      <div class="sidebar-footer">
+        <button class="user-profile" id="user-profile-btn" aria-label="User profile: EcoUser, Carbon Newbie level" aria-haspopup="true">
+          <div class="user-avatar" aria-hidden="true"><span>E</span></div>
+          <div class="user-info">
+            <span class="user-name">EcoUser</span>
+            <span class="user-level">🌱 Carbon Newbie</span>
+          </div>
+        </button>
+      </div>
+
+    </nav><!-- end sidebar -->
+
+    <!-- ══════ MAIN WRAPPER ══════ -->
+    <div class="main-wrapper" id="main-wrapper">
+
+      <!-- Mobile Top Bar -->
+      <header class="top-bar" id="top-bar" role="banner">
+        <button class="hamburger" id="hamburger"
+          aria-label="Open navigation menu"
+          aria-expanded="false"
+          aria-controls="sidebar">
+          <span aria-hidden="true"></span>
+          <span aria-hidden="true"></span>
+          <span aria-hidden="true"></span>
+        </button>
+
+        <div class="topbar-brand" aria-hidden="true">
+          <svg width="22" height="22" viewBox="0 0 30 30" fill="none">
+            <circle cx="15" cy="15" r="13" stroke="url(#tblg)" stroke-width="2"/>
+            <path d="M15 5C11 5 8 8.5 8 12c0 5 7 15 7 15s7-10 7-15c0-3.5-3-7-7-7z" fill="url(#tblg)"/>
+            <defs>
+              <linearGradient id="tblg" x1="0" y1="0" x2="30" y2="30">
+                <stop offset="0%" stop-color="hsl(142,71%,58%)"/>
+                <stop offset="100%" stop-color="hsl(191,91%,52%)"/>
+              </linearGradient>
+            </defs>
+          </svg>
+          <span class="topbar-wordmark">EcoPersona<span class="logo-ai">AI</span></span>
+        </div>
+
+        <div class="topbar-actions">
+          <button class="icon-btn" id="notif-btn" aria-label="Notifications — 2 unread">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M18 8A6 6 0 006 8c0 7-3 9-3 9h18s-3-2-3-9"/>
+              <path d="M13.73 21a2 2 0 01-3.46 0"/>
+            </svg>
+            <span class="notif-dot" aria-hidden="true"></span>
+          </button>
+        </div>
+      </header>
+
+      <!-- ══════ MAIN CONTENT ══════ -->
+      <main id="main-content" class="main-content" tabindex="-1">
+
+        <!-- ── AWARENESS BANNER ── -->
+        <section class="awareness-banner" aria-label="Carbon awareness facts">
+          <div class="banner-slides" id="banner-slides" aria-live="polite" aria-atomic="false">
+
+            <div class="banner-slide active" aria-hidden="false">
+              <span class="banner-emoji" aria-hidden="true">🌍</span>
+              <p class="banner-text">The global carbon budget for <strong>1.5°C warming</strong> may run out within 6 years at current emission rates.</p>
+            </div>
+            <div class="banner-slide" aria-hidden="true">
+              <span class="banner-emoji" aria-hidden="true">⚡</span>
+              <p class="banner-text">Renewable energy is now the <strong>cheapest source</strong> of new electricity in history — cheaper than coal.</p>
+            </div>
+            <div class="banner-slide" aria-hidden="true">
+              <span class="banner-emoji" aria-hidden="true">🌱</span>
+              <p class="banner-text">Every tonne of CO₂ you avoid matters. Your small actions create <strong>real, measurable impact</strong> on our planet.</p>
+            </div>
+            <div class="banner-slide" aria-hidden="true">
+              <span class="banner-emoji" aria-hidden="true">🔥</span>
+              <p class="banner-text">2024 was the <strong>hottest year on record</strong> — 1.5°C above pre-industrial levels for the first time ever.</p>
+            </div>
+
+          </div>
+
+          <div class="banner-controls" aria-label="Banner navigation">
+            <button class="banner-btn" id="banner-prev" aria-label="Previous awareness fact">
+              <svg width="12" height="12" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M9 2L4 7l5 5"/></svg>
+            </button>
+            <div class="banner-dots" role="tablist" aria-label="Awareness slides" id="banner-dots">
+              <button class="banner-dot active" role="tab" aria-selected="true"  aria-label="Slide 1 of 4" data-idx="0"></button>
+              <button class="banner-dot"        role="tab" aria-selected="false" aria-label="Slide 2 of 4" data-idx="1"></button>
+              <button class="banner-dot"        role="tab" aria-selected="false" aria-label="Slide 3 of 4" data-idx="2"></button>
+              <button class="banner-dot"        role="tab" aria-selected="false" aria-label="Slide 4 of 4" data-idx="3"></button>
+            </div>
+            <button class="banner-btn" id="banner-next" aria-label="Next awareness fact">
+              <svg width="12" height="12" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M5 2l5 5-5 5"/></svg>
+            </button>
+          </div>
+        </section>
+
+        <!-- ── HERO SECTION ── -->
+        <section class="hero-section" aria-labelledby="hero-heading">
+          <div class="hero-content">
+
+            <div class="hero-text">
+              <p class="hero-greeting" id="hero-greeting" aria-live="polite">
+                Good evening, <span class="hero-name">EcoUser</span> 👋
+              </p>
+              <h1 class="hero-title" id="hero-heading">
+                Your Planet Impact,<br>
+                <span class="gradient-text">At a Glance</span>
+              </h1>
+              <p class="hero-subtitle">
+                Track your carbon footprint, discover personalised insights, and take meaningful actions toward a sustainable future.
+              </p>
+              <div class="hero-cta" role="group" aria-label="Primary actions">
+                <a href="#calculator" class="btn btn--primary" data-module="calculator" id="cta-calculator">
+                  <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <rect x="4" y="2" width="16" height="20" rx="2"/>
+                    <line x1="8" y1="6" x2="16" y2="6"/>
+                    <line x1="8" y1="10" x2="10" y2="10"/>
+                  </svg>
+                  Calculate Footprint
+                </a>
+                <a href="#assessment" class="btn btn--ghost" data-module="assessment" id="cta-assessment">
+                  Take Assessment
+                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <path d="M5 12h14M12 5l7 7-7 7"/>
+                  </svg>
+                </a>
+              </div>
+            </div>
+
+            <!-- Animated Earth Globe -->
+            <div class="hero-visual" aria-hidden="true">
+              <div class="earth-scene">
+                <div class="earth-glow"></div>
+                <div class="earth-orbit orbit-1"></div>
+                <div class="earth-orbit orbit-2"></div>
+                <div class="earth-globe">
+                  <svg class="earth-svg" viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">
+                    <!-- Ocean -->
+                    <circle cx="60" cy="60" r="58" fill="url(#ocean)"/>
+                    <!-- Land masses -->
+                    <path d="M30 42 Q38 36 46 40 Q52 32 59 37 Q65 30 72 37 Q79 32 83 40 Q90 37 94 47 Q87 57 80 54 Q73 62 66 60 Q59 67 53 62 Q46 67 39 60 Q33 57 30 50Z" fill="url(#land)"/>
+                    <path d="M37 72 Q43 67 51 70 Q57 64 64 70 Q70 65 77 72 Q71 80 63 78 Q57 83 50 80 Q42 82 37 76Z" fill="url(#land)"/>
+                    <path d="M81 67 Q86 62 91 67 Q93 72 89 77 Q85 74 81 70Z" fill="url(#land)"/>
+                    <!-- Atmosphere glow -->
+                    <circle cx="60" cy="60" r="58" fill="url(#atmo)"/>
+                    <!-- Shine -->
+                    <circle cx="60" cy="60" r="58" fill="url(#shine)"/>
+                    <defs>
+                      <radialGradient id="ocean" cx="38%" cy="30%">
+                        <stop offset="0%"   stop-color="hsl(200,80%,32%)"/>
+                        <stop offset="100%" stop-color="hsl(210,80%,14%)"/>
+                      </radialGradient>
+                      <linearGradient id="land" x1="0" y1="0" x2="1" y2="1">
+                        <stop offset="0%"   stop-color="hsl(142,58%,28%)"/>
+                        <stop offset="100%" stop-color="hsl(130,48%,18%)"/>
+                      </linearGradient>
+                      <radialGradient id="atmo" cx="50%" cy="50%" r="50%">
+                        <stop offset="85%" stop-color="transparent"/>
+                        <stop offset="100%" stop-color="hsl(191,80%,45%)" stop-opacity="0.12"/>
+                      </radialGradient>
+                      <radialGradient id="shine" cx="28%" cy="22%">
+                        <stop offset="0%"   stop-color="white" stop-opacity="0.14"/>
+                        <stop offset="55%"  stop-color="white" stop-opacity="0"/>
+                      </radialGradient>
+                    </defs>
+                  </svg>
+                  <!-- Orbiting satellite dot -->
+                  <div class="orbit-dot"></div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </section><!-- end hero -->
+
+        <!-- ── STATS ROW ── -->
+        <section class="stats-section" aria-labelledby="stats-heading">
+          <h2 id="stats-heading" class="sr-only">Your carbon statistics</h2>
+          <div class="stats-grid">
+
+            <!-- Stat 1: Annual Footprint -->
+            <article class="stat-card" aria-labelledby="lbl-footprint">
+              <div class="stat-header">
+                <div class="stat-icon-box stat-icon-box--brand" aria-hidden="true">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M12 2a7 7 0 00-7 7c0 5 7 13 7 13s7-8 7-13a7 7 0 00-7-7z"/>
+                    <circle cx="12" cy="9" r="2.5" fill="currentColor" stroke="none"/>
+                  </svg>
+                </div>
+                <span class="stat-trend stat-trend--up" aria-label="12 percent higher than last month">
+                  <svg width="10" height="10" viewBox="0 0 10 10" fill="currentColor" aria-hidden="true"><path d="M5 1L9 6H1L5 1z"/></svg>
+                  12%
+                </span>
+              </div>
+              <div class="stat-val-row">
+                <span class="stat-val" id="val-footprint" data-target="8.2" data-dec="1" aria-live="polite">0.0</span>
+                <span class="stat-unit">tCO₂e</span>
+              </div>
+              <p class="stat-lbl" id="lbl-footprint">Annual Footprint</p>
+              <p class="stat-sub">vs <abbr title="tonnes of CO₂ equivalent">4.7t</abbr> global avg</p>
+            </article>
+
+            <!-- Stat 2: CO₂ Avoided -->
+            <article class="stat-card" aria-labelledby="lbl-saved">
+              <div class="stat-header">
+                <div class="stat-icon-box stat-icon-box--success" aria-hidden="true">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M12 22s-8-4.5-8-11.8A8 8 0 0112 2a8 8 0 018 8.2c0 7.3-8 11.8-8 11.8z"/>
+                    <path d="M9 12l2 2 4-4" stroke-width="2.5"/>
+                  </svg>
+                </div>
+                <span class="stat-trend stat-trend--good" aria-label="Carbon avoided through your actions">
+                  <svg width="10" height="10" viewBox="0 0 10 10" fill="currentColor" aria-hidden="true"><path d="M5 9L1 4h8L5 9z"/></svg>
+                  saved
+                </span>
+              </div>
+              <div class="stat-val-row">
+                <span class="stat-val" id="val-saved" data-target="0.3" data-dec="1" aria-live="polite">0.0</span>
+                <span class="stat-unit">tCO₂e</span>
+              </div>
+              <p class="stat-lbl" id="lbl-saved">CO₂ Avoided</p>
+              <p class="stat-sub">from your actions</p>
+            </article>
+
+            <!-- Stat 3: Eco Score -->
+            <article class="stat-card" aria-labelledby="lbl-score">
+              <div class="stat-header">
+                <div class="stat-icon-box stat-icon-box--accent" aria-hidden="true">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+                  </svg>
+                </div>
+                <span class="eco-badge" aria-label="Eco level: Eco Aware">Eco Aware</span>
+              </div>
+              <div class="stat-val-row">
+                <span class="stat-val" id="val-score" data-target="42" data-dec="0" aria-live="polite">0</span>
+                <span class="stat-unit">/100</span>
+              </div>
+              <p class="stat-lbl" id="lbl-score">Eco Score</p>
+              <p class="stat-sub">keep improving! 🌿</p>
+            </article>
+
+            <!-- Stat 4: Streak -->
+            <article class="stat-card" aria-labelledby="lbl-streak">
+              <div class="stat-header">
+                <div class="stat-icon-box stat-icon-box--warning" aria-hidden="true">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/>
+                  </svg>
+                </div>
+                <span class="stat-trend stat-trend--neutral" aria-label="Start your streak today">start today</span>
+              </div>
+              <div class="stat-val-row">
+                <span class="stat-val" id="val-streak" data-target="0" data-dec="0" aria-live="polite">0</span>
+                <span class="stat-unit">days</span>
+              </div>
+              <p class="stat-lbl" id="lbl-streak">Eco Streak</p>
+              <p class="stat-sub">complete a challenge</p>
+            </article>
+
+          </div>
+        </section><!-- end stats -->
+
+        <!-- ── DASHBOARD CONTENT GRID ── -->
+        <div class="dash-grid" aria-label="Dashboard modules">
+
+          <!-- CARBON SCORE CARD -->
+          <section class="dash-card card--score" aria-labelledby="score-card-heading">
+            <div class="card-head">
+              <h2 class="card-title" id="score-card-heading">Carbon Score</h2>
+              <span class="tag tag--warning">Below Average</span>
+            </div>
+
+            <!-- SVG Progress Ring -->
+            <figure class="ring-figure" aria-label="Carbon score: 42 out of 100 — below average" role="img">
+              <svg class="ring-svg" viewBox="0 0 160 160" aria-hidden="true">
+                <defs>
+                  <linearGradient id="ring-grad" x1="0" y1="0" x2="1" y2="1">
+                    <stop offset="0%"   stop-color="hsl(38,92%,56%)"/>
+                    <stop offset="50%"  stop-color="hsl(142,71%,49%)"/>
+                    <stop offset="100%" stop-color="hsl(191,91%,52%)"/>
+                  </linearGradient>
+                </defs>
+                <!-- Background track -->
+                <circle class="ring-track" cx="80" cy="80" r="62"
+                  fill="none" stroke="hsl(222,14%,20%)" stroke-width="11"/>
+                <!-- Animated fill -->
+                <circle class="ring-fill" id="ring-fill" cx="80" cy="80" r="62"
+                  fill="none" stroke="url(#ring-grad)" stroke-width="11"
+                  stroke-linecap="round"
+                  stroke-dasharray="389.56"
+                  stroke-dashoffset="389.56"
+                  transform="rotate(-90 80 80)"/>
+              </svg>
+              <div class="ring-center" aria-hidden="true">
+                <span class="ring-score gradient-text" id="ring-score">42</span>
+                <span class="ring-label">/ 100</span>
+              </div>
+            </figure>
+
+            <!-- Breakdown bars -->
+            <div class="breakdown" role="list" aria-label="Footprint breakdown by category">
+              <div class="breakdown-row" role="listitem">
+                <span class="bk-label">Transport</span>
+                <div class="bk-track" role="progressbar" aria-valuenow="38" aria-valuemin="0" aria-valuemax="100" aria-label="Transport: 38% of footprint">
+                  <div class="bk-fill" style="--w:38%;--c:hsl(4,86%,58%)"></div>
+                </div>
+                <span class="bk-pct">38%</span>
+              </div>
+              <div class="breakdown-row" role="listitem">
+                <span class="bk-label">Food</span>
+                <div class="bk-track" role="progressbar" aria-valuenow="27" aria-valuemin="0" aria-valuemax="100" aria-label="Food: 27% of footprint">
+                  <div class="bk-fill" style="--w:27%;--c:hsl(38,92%,52%)"></div>
+                </div>
+                <span class="bk-pct">27%</span>
+              </div>
+              <div class="breakdown-row" role="listitem">
+                <span class="bk-label">Home</span>
+                <div class="bk-track" role="progressbar" aria-valuenow="22" aria-valuemin="0" aria-valuemax="100" aria-label="Home energy: 22% of footprint">
+                  <div class="bk-fill" style="--w:22%;--c:hsl(217,91%,60%)"></div>
+                </div>
+                <span class="bk-pct">22%</span>
+              </div>
+              <div class="breakdown-row" role="listitem">
+                <span class="bk-label">Other</span>
+                <div class="bk-track" role="progressbar" aria-valuenow="13" aria-valuemin="0" aria-valuemax="100" aria-label="Other: 13% of footprint">
+                  <div class="bk-fill" style="--w:13%;--c:hsl(263,70%,60%)"></div>
+                </div>
+                <span class="bk-pct">13%</span>
+              </div>
+            </div>
+
+            <p class="score-note">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+              Sample data. <a href="#calculator" class="inline-link" data-module="calculator">Calculate your real score →</a>
+            </p>
+          </section>
+
+          <!-- WEEKLY TREND CHART -->
+          <section class="dash-card card--chart" aria-labelledby="chart-heading">
+            <div class="card-head">
+              <h2 class="card-title" id="chart-heading">Weekly Carbon Trend</h2>
+              <div class="period-tabs" role="tablist" aria-label="Chart time period">
+                <button class="period-tab active" role="tab" aria-selected="true"  data-period="week" id="tab-week">Week</button>
+                <button class="period-tab"        role="tab" aria-selected="false" data-period="month" id="tab-month">Month</button>
+                <button class="period-tab"        role="tab" aria-selected="false" data-period="year"  id="tab-year">Year</button>
+              </div>
+            </div>
+
+            <div class="chart-wrap">
+              <canvas id="weekly-chart"
+                role="img"
+                aria-label="Line chart: weekly carbon emissions. Average 21.1 kg CO₂e per day this week.">
+              </canvas>
+            </div>
+
+            <!-- Accessible data table (screen readers) -->
+            <table class="sr-only" aria-label="Weekly carbon emissions data">
+              <caption>Carbon emissions for the past 7 days</caption>
+              <thead><tr><th scope="col">Day</th><th scope="col">Emissions (kg CO₂e)</th></tr></thead>
+              <tbody id="chart-table"></tbody>
+            </table>
+
+            <div class="chart-footer">
+              <div class="chart-metric">
+                <span class="chart-metric-val">22.4 kg</span>
+                <span class="chart-metric-lbl">avg / day</span>
+              </div>
+              <div class="chart-divider" aria-hidden="true"></div>
+              <div class="chart-metric">
+                <span class="chart-metric-val chart-metric-val--good">↓ 8%</span>
+                <span class="chart-metric-lbl">vs last week</span>
+              </div>
+              <div class="chart-divider" aria-hidden="true"></div>
+              <div class="chart-metric">
+                <span class="chart-metric-val">156.6 kg</span>
+                <span class="chart-metric-lbl">this week total</span>
+              </div>
+            </div>
+          </section>
+
+          <!-- DAILY ECO FACT -->
+          <section class="dash-card card--fact" aria-labelledby="fact-heading">
+            <div class="card-head">
+              <div class="card-title-row">
+                <span id="fact-emoji" aria-hidden="true">✈️</span>
+                <h2 class="card-title" id="fact-heading">Daily Eco Fact</h2>
+              </div>
+              <button class="icon-btn" id="refresh-fact" aria-label="Load next eco fact">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <polyline points="23 4 23 10 17 10"/>
+                  <polyline points="1 20 1 14 7 14"/>
+                  <path d="M3.51 9a9 9 0 0114.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0020.49 15"/>
+                </svg>
+              </button>
+            </div>
+
+            <div class="fact-body" id="fact-body" aria-live="polite" aria-atomic="true">
+              <span class="fact-cat" id="fact-cat">Transport</span>
+              <blockquote class="fact-quote" id="fact-quote">
+                Shifting just one transatlantic flight to economy class saves as much CO₂ as going vegan for an entire year.
+              </blockquote>
+              <cite class="fact-source" id="fact-source">— Our World in Data, 2023</cite>
+            </div>
+
+            <footer class="fact-foot">
+              <button class="fact-btn" id="copy-fact" aria-label="Copy this fact to clipboard">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <rect x="9" y="9" width="13" height="13" rx="2"/>
+                  <path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/>
+                </svg>
+                Copy
+              </button>
+              <button class="fact-btn" id="next-fact" aria-label="See next eco fact">
+                Next Fact
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <path d="M5 12h14M12 5l7 7-7 7"/>
+                </svg>
+              </button>
+            </footer>
+          </section>
+
+          <!-- QUICK ACTIONS / EXPLORE MODULES -->
+          <section class="dash-card card--actions" aria-labelledby="actions-heading">
+            <div class="card-head">
+              <h2 class="card-title" id="actions-heading">Explore Modules</h2>
+              <span class="tag tag--brand">11 modules</span>
+            </div>
+
+            <ul class="actions-list" role="list" aria-label="Application modules">
+
+              <li role="listitem">
+                <a href="#assessment" class="action-item" data-module="assessment"
+                  aria-label="Lifestyle DNA Assessment — Discover your eco persona">
+                  <div class="action-icon" style="--ibg:hsl(263,60%,18%);--iclr:hsl(263,70%,68%)" aria-hidden="true">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                      <path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"/>
+                    </svg>
+                  </div>
+                  <div class="action-text">
+                    <h3 class="action-name">Lifestyle DNA</h3>
+                    <p class="action-desc">Discover your eco persona</p>
+                  </div>
+                  <svg class="action-arr" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                </a>
+              </li>
+
+              <li role="listitem">
+                <a href="#calculator" class="action-item" data-module="calculator"
+                  aria-label="Carbon Calculator — Measure your exact footprint">
+                  <div class="action-icon" style="--ibg:hsl(142,60%,10%);--iclr:hsl(142,71%,52%)" aria-hidden="true">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                      <rect x="4" y="2" width="16" height="20" rx="2"/>
+                      <line x1="8" y1="6" x2="16" y2="6"/>
+                      <line x1="8" y1="10" x2="10" y2="10"/><line x1="12" y1="10" x2="14" y2="10"/>
+                    </svg>
+                  </div>
+                  <div class="action-text">
+                    <h3 class="action-name">Carbon Calculator</h3>
+                    <p class="action-desc">Measure your exact footprint</p>
+                  </div>
+                  <svg class="action-arr" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                </a>
+              </li>
+
+              <li role="listitem">
+                <a href="#roadmap" class="action-item" data-module="roadmap"
+                  aria-label="AI Action Roadmap — Your personalised action plan">
+                  <div class="action-icon" style="--ibg:hsl(191,70%,10%);--iclr:hsl(191,91%,55%)" aria-hidden="true">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                      <circle cx="5" cy="6" r="1.5" fill="currentColor"/><line x1="7" y1="6" x2="20" y2="6"/>
+                      <circle cx="19" cy="12" r="1.5" fill="currentColor"/><line x1="4" y1="12" x2="17" y2="12"/>
+                      <circle cx="5" cy="18" r="1.5" fill="currentColor"/><line x1="7" y1="18" x2="20" y2="18"/>
+                    </svg>
+                  </div>
+                  <div class="action-text">
+                    <h3 class="action-name">AI Roadmap</h3>
+                    <p class="action-desc">Your personalised action plan</p>
+                  </div>
+                  <svg class="action-arr" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                </a>
+              </li>
+
+              <li role="listitem">
+                <a href="#challenges" class="action-item action-item--highlight" data-module="challenges"
+                  aria-label="Eco Challenges — 3 active challenges this week">
+                  <div class="action-icon" style="--ibg:hsl(38,70%,10%);--iclr:hsl(38,92%,58%)" aria-hidden="true">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                      <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+                    </svg>
+                  </div>
+                  <div class="action-text">
+                    <h3 class="action-name">Eco Challenges</h3>
+                    <p class="action-desc"><span class="active-pill" aria-label="3 active challenges">3 active</span> this week</p>
+                  </div>
+                  <svg class="action-arr" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                </a>
+              </li>
+
+              <li role="listitem">
+                <a href="#quiz" class="action-item" data-module="quiz"
+                  aria-label="Carbon Quiz — Test your eco knowledge">
+                  <div class="action-icon" style="--ibg:hsl(4,60%,10%);--iclr:hsl(4,86%,65%)" aria-hidden="true">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                      <path d="M9.09 9a3 3 0 015.83 1c0 2-3 3-3 3"/>
+                      <line x1="12" y1="17" x2="12.01" y2="17"/>
+                      <circle cx="12" cy="12" r="10"/>
+                    </svg>
+                  </div>
+                  <div class="action-text">
+                    <h3 class="action-name">Carbon Quiz</h3>
+                    <p class="action-desc">Test your eco knowledge</p>
+                  </div>
+                  <svg class="action-arr" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                </a>
+              </li>
+
+              <li role="listitem">
+                <a href="#simulator" class="action-item" data-module="simulator"
+                  aria-label="Reality Simulator — See your future carbon impact">
+                  <div class="action-icon" style="--ibg:hsl(217,60%,10%);--iclr:hsl(217,91%,65%)" aria-hidden="true">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                      <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/>
+                    </svg>
+                  </div>
+                  <div class="action-text">
+                    <h3 class="action-name">Reality Simulator</h3>
+                    <p class="action-desc">See your future impact</p>
+                  </div>
+                  <svg class="action-arr" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                </a>
+              </li>
+
+            </ul>
+          </section>
+
+        </div><!-- end dash-grid -->
+
+      </main><!-- end main-content -->
+
+    </div><!-- end main-wrapper -->
+
+  </div><!-- end app-shell -->
+
+  <!-- ══════════════════════════════════════════
+       MOBILE BOTTOM NAVIGATION
+  ══════════════════════════════════════════ -->
+  <nav class="bottom-nav" id="bottom-nav" aria-label="Mobile navigation">
+    <a href="#dashboard" class="tab-item active" data-module="dashboard" aria-label="Dashboard" aria-current="page">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/>
+        <rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/>
+      </svg>
+      <span>Home</span>
+    </a>
+    <a href="#calculator" class="tab-item" data-module="calculator" aria-label="Carbon Calculator">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <rect x="4" y="2" width="16" height="20" rx="2"/><line x1="8" y1="6" x2="16" y2="6"/>
+      </svg>
+      <span>Calculate</span>
+    </a>
+    <a href="#challenges" class="tab-item" data-module="challenges" aria-label="Eco Challenges — 3 active">
+      <div class="tab-badge" aria-hidden="true">3</div>
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+      </svg>
+      <span>Challenges</span>
+    </a>
+    <a href="#progress" class="tab-item" data-module="progress" aria-label="Progress Tracking">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/>
+      </svg>
+      <span>Progress</span>
+    </a>
+    <a href="#profile" class="tab-item" data-module="profile" aria-label="User Profile">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/>
+        <circle cx="12" cy="7" r="4"/>
+      </svg>
+      <span>Profile</span>
+    </a>
+  </nav>
+
+  <!-- ══════════════════════════════════════════
+       TOAST NOTIFICATION CONTAINER
+  ══════════════════════════════════════════ -->
+  <div id="toast-container" class="toast-container" role="status" aria-live="polite" aria-relevant="additions text"></div>
+
+  <!-- Mobile sidebar overlay -->
+  <div class="sidebar-overlay" id="sidebar-overlay" aria-hidden="true"></div>
+
+  <script src="script.js"></script>
+</body>
+</html>
