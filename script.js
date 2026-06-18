@@ -190,15 +190,21 @@ const SIMULATOR_CONFIG = [
    2. STORE — LocalStorage Manager
 ═══════════════════════════════════════════════════ */
 const Store = {
+  /** @type {Map<string, *>} */
+  _cache: new Map(),
+
   /**
    * Read a value; returns null on missing/corrupt data.
    * @param {string} key
    * @returns {*}
    */
   get(key) {
+    if (this._cache.has(key)) return this._cache.get(key);
     try {
       const raw = localStorage.getItem(CONFIG.STORAGE_PREFIX + key);
-      return raw !== null ? JSON.parse(raw) : null;
+      const val = raw !== null ? JSON.parse(raw) : null;
+      this._cache.set(key, val);
+      return val;
     } catch {
       return null;
     }
@@ -213,6 +219,7 @@ const Store = {
   set(key, value) {
     try {
       localStorage.setItem(CONFIG.STORAGE_PREFIX + key, JSON.stringify(value));
+      this._cache.set(key, value);
       return true;
     } catch (e) {
       console.warn('[Store] Write failed:', key, e.message);
@@ -233,6 +240,7 @@ const Store = {
   /** Remove a single key. */
   remove(key) {
     localStorage.removeItem(CONFIG.STORAGE_PREFIX + key);
+    this._cache.delete(key);
   }
 };
 
@@ -298,9 +306,13 @@ const Utils = {
    * @returns {string} escaped HTML
    */
   escape(str) {
-    const el = document.createElement('div');
-    el.textContent = String(str);
-    return el.innerHTML;
+    if (str == null) return '';
+    return String(str)
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;')
+      .replace(/'/g, '&#39;');
   },
 
   /** Clamp a number between min and max. */
@@ -1975,7 +1987,26 @@ const EcoStory = {
     }
 
     if (noData) noData.hidden = true;
-    if (content) { content.hidden = false; this._generateStory(result, content); }
+    if (content) { 
+      content.hidden = false; 
+      
+      // AI Processing Simulation
+      content.innerHTML = `
+        <div style="text-align:center; padding: 4rem 2rem;">
+          <div style="font-size: 3.5rem; margin-bottom: 1rem; opacity: 0.8;">🧠</div>
+          <h3 style="margin-top: 1rem; color: var(--brand-light);">EcoPersona AI is analyzing your data...</h3>
+          <p style="color: var(--t3); margin-top: 0.5rem;">Generating your personalized sustainability narrative.</p>
+          <div style="width: 200px; height: 4px; background: var(--bg-card); margin: 2rem auto; border-radius: 4px; overflow: hidden;">
+            <div style="width: 100%; height: 100%; background: var(--brand); animation: indet 1.5s infinite ease-in-out;"></div>
+          </div>
+        </div>
+        <style>@keyframes indet { 0% { transform: translateX(-100%); } 100% { transform: translateX(100%); } }</style>
+      `;
+
+      setTimeout(() => {
+        this._generateStory(result, content);
+      }, 1800);
+    }
   },
 
   _generateStory(result, container) {
