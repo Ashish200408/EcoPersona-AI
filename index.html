@@ -3,17 +3,18 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="EcoPersona AI — Track and reduce your carbon footprint with personalized insights, AI-powered recommendations, and real-time impact visualization." />
+  <meta name="description" content="EcoPersona AI — Know Your Impact. Shape Your Future. Track, understand, and reduce your carbon footprint through personalized AI-powered insights." />
   <meta name="theme-color" content="#0D1117" />
-  <meta property="og:title" content="EcoPersona AI — Home Dashboard" />
-  <meta property="og:description" content="Your personal carbon footprint tracker powered by AI." />
-  <title>EcoPersona AI — Home Dashboard</title>
+  <meta property="og:title" content="EcoPersona AI — Know Your Impact. Shape Your Future." />
+  <meta property="og:description" content="Your personal sustainability awareness and action platform powered by AI." />
+  <meta name="keywords" content="carbon footprint, sustainability, eco friendly, climate change, green living" />
+  <title>EcoPersona AI — Know Your Impact. Shape Your Future.</title>
 
   <!-- Preconnect for performance -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 
-  <!-- Typography: Outfit (display) + Inter (body) + JetBrains Mono (data) -->
+  <!-- Typography -->
   <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet" />
 
   <!-- Chart.js -->
@@ -23,18 +24,14 @@
 </head>
 <body>
 
-  <!-- ══════════════════════════════════════════
-       ACCESSIBILITY: SKIP LINK & LIVE REGIONS
-  ══════════════════════════════════════════ -->
+  <!-- ACCESSIBILITY: SKIP LINK & LIVE REGIONS -->
   <a href="#main-content" class="skip-link">Skip to main content</a>
   <div id="aria-announcer" role="status" aria-live="polite" aria-atomic="true" class="sr-only"></div>
 
-  <!-- ══════════════════════════════════════════
-       APP SHELL
-  ══════════════════════════════════════════ -->
+  <!-- APP SHELL -->
   <div class="app-shell" id="app-shell">
 
-    <!-- ══════ SIDEBAR NAVIGATION ══════ -->
+    <!-- SIDEBAR NAVIGATION -->
     <nav class="sidebar" id="sidebar" aria-label="Main navigation">
 
       <!-- Logo & Collapse Toggle -->
@@ -78,29 +75,11 @@
             </span>
             <span class="nav-label">Dashboard</span>
           </a>
-
-          <a href="#progress" class="nav-item" role="listitem" data-module="progress" tabindex="0">
-            <span class="nav-icon" aria-hidden="true">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <polyline points="22,12 18,12 15,21 9,3 6,12 2,12"/>
-              </svg>
-            </span>
-            <span class="nav-label">Progress Tracking</span>
-          </a>
-
-          <a href="#projection" class="nav-item" role="listitem" data-module="projection" tabindex="0">
-            <span class="nav-icon" aria-hidden="true">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M3 20l4-8 4 4 4-6 4 3"/><polyline points="16 8 20 8 20 12"/>
-              </svg>
-            </span>
-            <span class="nav-label">Future Projections</span>
-          </a>
         </div>
 
-        <!-- Measure Group -->
+        <!-- Assess Group -->
         <div class="nav-group">
-          <span class="nav-group-label" aria-hidden="true">Measure</span>
+          <span class="nav-group-label" aria-hidden="true">Assess</span>
 
           <a href="#assessment" class="nav-item" role="listitem" data-module="assessment" tabindex="0">
             <span class="nav-icon" aria-hidden="true">
@@ -108,45 +87,40 @@
                 <path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"/>
               </svg>
             </span>
-            <span class="nav-label">Lifestyle DNA</span>
+            <span class="nav-label">Eco Personality</span>
             <span class="nav-pill" aria-label="New feature">New</span>
           </a>
 
-          <a href="#calculator" class="nav-item" role="listitem" data-module="calculator" tabindex="0">
+          <a href="#blindspot" class="nav-item" role="listitem" data-module="blindspot" tabindex="0">
             <span class="nav-icon" aria-hidden="true">
               <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <rect x="4" y="2" width="16" height="20" rx="2"/>
-                <line x1="8" y1="6" x2="16" y2="6"/>
-                <line x1="8" y1="10" x2="10" y2="10"/><line x1="12" y1="10" x2="14" y2="10"/><line x1="16" y1="10" x2="16" y2="10"/>
-                <line x1="8" y1="14" x2="10" y2="14"/><line x1="12" y1="14" x2="14" y2="14"/><line x1="16" y1="14" x2="16" y2="14"/>
+                <circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="16"/><line x1="8" y1="12" x2="16" y2="12"/>
               </svg>
             </span>
-            <span class="nav-label">Carbon Calculator</span>
+            <span class="nav-label">Blind Spot Detector</span>
+          </a>
+
+          <a href="#story" class="nav-item" role="listitem" data-module="story" tabindex="0">
+            <span class="nav-icon" aria-hidden="true">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M12 2C6.477 2 2 6.477 2 12s4.477 10 10 10 10-4.477 10-10S17.523 2 12 2z"/><path d="M8 12s1.5 2 4 2 4-2 4-2"/><line x1="9" y1="9" x2="9.01" y2="9"/><line x1="15" y1="9" x2="15.01" y2="9"/>
+              </svg>
+            </span>
+            <span class="nav-label">My Eco Story</span>
           </a>
         </div>
 
-        <!-- Learn & Act Group -->
+        <!-- Learn Group -->
         <div class="nav-group">
-          <span class="nav-group-label" aria-hidden="true">Learn &amp; Act</span>
+          <span class="nav-group-label" aria-hidden="true">Learn</span>
 
-          <a href="#awareness" class="nav-item" role="listitem" data-module="awareness" tabindex="0">
+          <a href="#learning" class="nav-item" role="listitem" data-module="learning" tabindex="0">
             <span class="nav-icon" aria-hidden="true">
               <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/>
+                <path d="M2 3h6a4 4 0 014 4v14a3 3 0 00-3-3H2z"/><path d="M22 3h-6a4 4 0 00-4 4v14a3 3 0 013-3h7z"/>
               </svg>
             </span>
-            <span class="nav-label">Awareness Engine</span>
-          </a>
-
-          <a href="#roadmap" class="nav-item" role="listitem" data-module="roadmap" tabindex="0">
-            <span class="nav-icon" aria-hidden="true">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <circle cx="5" cy="6" r="1.5" fill="currentColor"/><line x1="6.5" y1="6" x2="20" y2="6"/>
-                <circle cx="19" cy="12" r="1.5" fill="currentColor"/><line x1="4" y1="12" x2="17.5" y2="12"/>
-                <circle cx="5" cy="18" r="1.5" fill="currentColor"/><line x1="6.5" y1="18" x2="20" y2="18"/>
-              </svg>
-            </span>
-            <span class="nav-label">AI Roadmap</span>
+            <span class="nav-label">Learning Hub</span>
           </a>
 
           <a href="#simulator" class="nav-item" role="listitem" data-module="simulator" tabindex="0">
@@ -155,13 +129,32 @@
                 <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/>
               </svg>
             </span>
-            <span class="nav-label">Reality Simulator</span>
+            <span class="nav-label">Impact Simulator</span>
           </a>
         </div>
 
-        <!-- Engage Group -->
+        <!-- Act Group -->
         <div class="nav-group">
-          <span class="nav-group-label" aria-hidden="true">Engage</span>
+          <span class="nav-group-label" aria-hidden="true">Act</span>
+
+          <a href="#missions" class="nav-item" role="listitem" data-module="missions" tabindex="0">
+            <span class="nav-icon" aria-hidden="true">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/>
+              </svg>
+            </span>
+            <span class="nav-label">Weekly Missions</span>
+            <span class="nav-pill nav-pill--warning" aria-label="3 missions active">3</span>
+          </a>
+
+          <a href="#habits" class="nav-item" role="listitem" data-module="habits" tabindex="0">
+            <span class="nav-icon" aria-hidden="true">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/>
+              </svg>
+            </span>
+            <span class="nav-label">Habit Tracker</span>
+          </a>
 
           <a href="#challenges" class="nav-item" role="listitem" data-module="challenges" tabindex="0">
             <span class="nav-icon" aria-hidden="true">
@@ -170,25 +163,6 @@
               </svg>
             </span>
             <span class="nav-label">Eco Challenges</span>
-            <span class="nav-pill nav-pill--warning" aria-label="3 active challenges">3</span>
-          </a>
-
-          <a href="#quiz" class="nav-item" role="listitem" data-module="quiz" tabindex="0">
-            <span class="nav-icon" aria-hidden="true">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M9.09 9a3 3 0 015.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/><circle cx="12" cy="12" r="10"/>
-              </svg>
-            </span>
-            <span class="nav-label">Carbon Quiz</span>
-          </a>
-
-          <a href="#visualization" class="nav-item" role="listitem" data-module="visualization" tabindex="0">
-            <span class="nav-icon" aria-hidden="true">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/>
-              </svg>
-            </span>
-            <span class="nav-label">Impact Visualization</span>
           </a>
         </div>
 
@@ -196,18 +170,18 @@
 
       <!-- User Profile Footer -->
       <div class="sidebar-footer">
-        <button class="user-profile" id="user-profile-btn" aria-label="User profile: EcoUser, Carbon Newbie level" aria-haspopup="true">
+        <button class="user-profile" id="user-profile-btn" aria-label="User profile: EcoUser" aria-haspopup="true">
           <div class="user-avatar" aria-hidden="true"><span>E</span></div>
           <div class="user-info">
             <span class="user-name">EcoUser</span>
-            <span class="user-level">🌱 Carbon Newbie</span>
+            <span class="user-level" id="user-level-display">🌱 Eco Explorer</span>
           </div>
         </button>
       </div>
 
     </nav><!-- end sidebar -->
 
-    <!-- ══════ MAIN WRAPPER ══════ -->
+    <!-- MAIN WRAPPER -->
     <div class="main-wrapper" id="main-wrapper">
 
       <!-- Mobile Top Bar -->
@@ -236,7 +210,7 @@
         </div>
 
         <div class="topbar-actions">
-          <button class="icon-btn" id="notif-btn" aria-label="Notifications — 2 unread">
+          <button class="icon-btn" id="notif-btn" aria-label="Notifications">
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
               <path d="M18 8A6 6 0 006 8c0 7-3 9-3 9h18s-3-2-3-9"/>
               <path d="M13.73 21a2 2 0 01-3.46 0"/>
@@ -246,13 +220,12 @@
         </div>
       </header>
 
-      <!-- ══════ MAIN CONTENT ══════ -->
+      <!-- MAIN CONTENT -->
       <main id="main-content" class="main-content" tabindex="-1">
 
-        <!-- ── AWARENESS BANNER ── -->
+        <!-- AWARENESS BANNER -->
         <section class="awareness-banner" aria-label="Carbon awareness facts">
           <div class="banner-slides" id="banner-slides" aria-live="polite" aria-atomic="false">
-
             <div class="banner-slide active" aria-hidden="false">
               <span class="banner-emoji" aria-hidden="true">🌍</span>
               <p class="banner-text">The global carbon budget for <strong>1.5°C warming</strong> may run out within 6 years at current emission rates.</p>
@@ -269,7 +242,10 @@
               <span class="banner-emoji" aria-hidden="true">🔥</span>
               <p class="banner-text">2024 was the <strong>hottest year on record</strong> — 1.5°C above pre-industrial levels for the first time ever.</p>
             </div>
-
+            <div class="banner-slide" aria-hidden="true">
+              <span class="banner-emoji" aria-hidden="true">🌊</span>
+              <p class="banner-text">Oceans absorb <strong>25% of all CO₂</strong> humans emit — but ocean acidification is weakening this vital carbon sink.</p>
+            </div>
           </div>
 
           <div class="banner-controls" aria-label="Banner navigation">
@@ -277,10 +253,11 @@
               <svg width="12" height="12" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M9 2L4 7l5 5"/></svg>
             </button>
             <div class="banner-dots" role="tablist" aria-label="Awareness slides" id="banner-dots">
-              <button class="banner-dot active" role="tab" aria-selected="true"  aria-label="Slide 1 of 4" data-idx="0"></button>
-              <button class="banner-dot"        role="tab" aria-selected="false" aria-label="Slide 2 of 4" data-idx="1"></button>
-              <button class="banner-dot"        role="tab" aria-selected="false" aria-label="Slide 3 of 4" data-idx="2"></button>
-              <button class="banner-dot"        role="tab" aria-selected="false" aria-label="Slide 4 of 4" data-idx="3"></button>
+              <button class="banner-dot active" role="tab" aria-selected="true"  aria-label="Slide 1 of 5" data-idx="0"></button>
+              <button class="banner-dot"        role="tab" aria-selected="false" aria-label="Slide 2 of 5" data-idx="1"></button>
+              <button class="banner-dot"        role="tab" aria-selected="false" aria-label="Slide 3 of 5" data-idx="2"></button>
+              <button class="banner-dot"        role="tab" aria-selected="false" aria-label="Slide 4 of 5" data-idx="3"></button>
+              <button class="banner-dot"        role="tab" aria-selected="false" aria-label="Slide 5 of 5" data-idx="4"></button>
             </div>
             <button class="banner-btn" id="banner-next" aria-label="Next awareness fact">
               <svg width="12" height="12" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M5 2l5 5-5 5"/></svg>
@@ -288,7 +265,7 @@
           </div>
         </section>
 
-        <!-- ── HERO SECTION ── -->
+        <!-- HERO SECTION -->
         <section class="hero-section" aria-labelledby="hero-heading">
           <div class="hero-content">
 
@@ -297,23 +274,21 @@
                 Good evening, <span class="hero-name">EcoUser</span> 👋
               </p>
               <h1 class="hero-title" id="hero-heading">
-                Your Planet Impact,<br>
-                <span class="gradient-text">At a Glance</span>
+                Know Your Impact,<br>
+                <span class="gradient-text">Shape Your Future</span>
               </h1>
               <p class="hero-subtitle">
-                Track your carbon footprint, discover personalised insights, and take meaningful actions toward a sustainable future.
+                Discover your carbon footprint, uncover hidden impacts, and build sustainable habits through personalized insights and actionable missions.
               </p>
               <div class="hero-cta" role="group" aria-label="Primary actions">
-                <a href="#calculator" class="btn btn--primary" data-module="calculator" id="cta-calculator">
+                <a href="#assessment" class="btn btn--primary" data-module="assessment" id="cta-assessment">
                   <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                    <rect x="4" y="2" width="16" height="20" rx="2"/>
-                    <line x1="8" y1="6" x2="16" y2="6"/>
-                    <line x1="8" y1="10" x2="10" y2="10"/>
+                    <path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"/>
                   </svg>
-                  Calculate Footprint
-                </a>
-                <a href="#assessment" class="btn btn--ghost" data-module="assessment" id="cta-assessment">
                   Take Assessment
+                </a>
+                <a href="#learning" class="btn btn--ghost" data-module="learning" id="cta-learning">
+                  Explore Learning Hub
                   <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
                     <path d="M5 12h14M12 5l7 7-7 7"/>
                   </svg>
@@ -329,15 +304,11 @@
                 <div class="earth-orbit orbit-2"></div>
                 <div class="earth-globe">
                   <svg class="earth-svg" viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">
-                    <!-- Ocean -->
                     <circle cx="60" cy="60" r="58" fill="url(#ocean)"/>
-                    <!-- Land masses -->
                     <path d="M30 42 Q38 36 46 40 Q52 32 59 37 Q65 30 72 37 Q79 32 83 40 Q90 37 94 47 Q87 57 80 54 Q73 62 66 60 Q59 67 53 62 Q46 67 39 60 Q33 57 30 50Z" fill="url(#land)"/>
                     <path d="M37 72 Q43 67 51 70 Q57 64 64 70 Q70 65 77 72 Q71 80 63 78 Q57 83 50 80 Q42 82 37 76Z" fill="url(#land)"/>
                     <path d="M81 67 Q86 62 91 67 Q93 72 89 77 Q85 74 81 70Z" fill="url(#land)"/>
-                    <!-- Atmosphere glow -->
                     <circle cx="60" cy="60" r="58" fill="url(#atmo)"/>
-                    <!-- Shine -->
                     <circle cx="60" cy="60" r="58" fill="url(#shine)"/>
                     <defs>
                       <radialGradient id="ocean" cx="38%" cy="30%">
@@ -358,7 +329,6 @@
                       </radialGradient>
                     </defs>
                   </svg>
-                  <!-- Orbiting satellite dot -->
                   <div class="orbit-dot"></div>
                 </div>
               </div>
@@ -367,74 +337,28 @@
           </div>
         </section><!-- end hero -->
 
-        <!-- ── STATS ROW ── -->
+        <!-- STATS ROW -->
         <section class="stats-section" aria-labelledby="stats-heading">
-          <h2 id="stats-heading" class="sr-only">Your carbon statistics</h2>
+          <h2 id="stats-heading" class="sr-only">Your sustainability statistics</h2>
           <div class="stats-grid">
 
-            <!-- Stat 1: Annual Footprint -->
-            <article class="stat-card" aria-labelledby="lbl-footprint">
-              <div class="stat-header">
-                <div class="stat-icon-box stat-icon-box--brand" aria-hidden="true">
-                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                    <path d="M12 2a7 7 0 00-7 7c0 5 7 13 7 13s7-8 7-13a7 7 0 00-7-7z"/>
-                    <circle cx="12" cy="9" r="2.5" fill="currentColor" stroke="none"/>
-                  </svg>
-                </div>
-                <span class="stat-trend stat-trend--up" aria-label="12 percent higher than last month">
-                  <svg width="10" height="10" viewBox="0 0 10 10" fill="currentColor" aria-hidden="true"><path d="M5 1L9 6H1L5 1z"/></svg>
-                  12%
-                </span>
-              </div>
-              <div class="stat-val-row">
-                <span class="stat-val" id="val-footprint" data-target="8.2" data-dec="1" aria-live="polite">0.0</span>
-                <span class="stat-unit">tCO₂e</span>
-              </div>
-              <p class="stat-lbl" id="lbl-footprint">Annual Footprint</p>
-              <p class="stat-sub">vs <abbr title="tonnes of CO₂ equivalent">4.7t</abbr> global avg</p>
-            </article>
-
-            <!-- Stat 2: CO₂ Avoided -->
-            <article class="stat-card" aria-labelledby="lbl-saved">
-              <div class="stat-header">
-                <div class="stat-icon-box stat-icon-box--success" aria-hidden="true">
-                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                    <path d="M12 22s-8-4.5-8-11.8A8 8 0 0112 2a8 8 0 018 8.2c0 7.3-8 11.8-8 11.8z"/>
-                    <path d="M9 12l2 2 4-4" stroke-width="2.5"/>
-                  </svg>
-                </div>
-                <span class="stat-trend stat-trend--good" aria-label="Carbon avoided through your actions">
-                  <svg width="10" height="10" viewBox="0 0 10 10" fill="currentColor" aria-hidden="true"><path d="M5 9L1 4h8L5 9z"/></svg>
-                  saved
-                </span>
-              </div>
-              <div class="stat-val-row">
-                <span class="stat-val" id="val-saved" data-target="0.3" data-dec="1" aria-live="polite">0.0</span>
-                <span class="stat-unit">tCO₂e</span>
-              </div>
-              <p class="stat-lbl" id="lbl-saved">CO₂ Avoided</p>
-              <p class="stat-sub">from your actions</p>
-            </article>
-
-            <!-- Stat 3: Eco Score -->
             <article class="stat-card" aria-labelledby="lbl-score">
               <div class="stat-header">
-                <div class="stat-icon-box stat-icon-box--accent" aria-hidden="true">
+                <div class="stat-icon-box stat-icon-box--brand" aria-hidden="true">
                   <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                     <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
                   </svg>
                 </div>
-                <span class="eco-badge" aria-label="Eco level: Eco Aware">Eco Aware</span>
+                <span class="eco-badge" id="eco-persona-badge" aria-label="Eco level: Eco Explorer">Eco Explorer</span>
               </div>
               <div class="stat-val-row">
-                <span class="stat-val" id="val-score" data-target="42" data-dec="0" aria-live="polite">0</span>
+                <span class="stat-val" id="val-score" data-target="62" data-dec="0" aria-live="polite">0</span>
                 <span class="stat-unit">/100</span>
               </div>
               <p class="stat-lbl" id="lbl-score">Eco Score</p>
               <p class="stat-sub">keep improving! 🌿</p>
             </article>
 
-            <!-- Stat 4: Streak -->
             <article class="stat-card" aria-labelledby="lbl-streak">
               <div class="stat-header">
                 <div class="stat-icon-box stat-icon-box--warning" aria-hidden="true">
@@ -442,43 +366,74 @@
                     <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/>
                   </svg>
                 </div>
-                <span class="stat-trend stat-trend--neutral" aria-label="Start your streak today">start today</span>
+                <span class="stat-trend stat-trend--neutral" aria-label="Current streak">🔥 Active</span>
               </div>
               <div class="stat-val-row">
                 <span class="stat-val" id="val-streak" data-target="0" data-dec="0" aria-live="polite">0</span>
                 <span class="stat-unit">days</span>
               </div>
               <p class="stat-lbl" id="lbl-streak">Eco Streak</p>
-              <p class="stat-sub">complete a challenge</p>
+              <p class="stat-sub" id="streak-sub">complete a habit today</p>
+            </article>
+
+            <article class="stat-card" aria-labelledby="lbl-missions">
+              <div class="stat-header">
+                <div class="stat-icon-box stat-icon-box--success" aria-hidden="true">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/>
+                  </svg>
+                </div>
+                <span class="stat-trend stat-trend--good" aria-label="Missions completed">Active</span>
+              </div>
+              <div class="stat-val-row">
+                <span class="stat-val" id="val-missions" data-target="3" data-dec="0" aria-live="polite">0</span>
+                <span class="stat-unit">missions</span>
+              </div>
+              <p class="stat-lbl" id="lbl-missions">Weekly Missions</p>
+              <p class="stat-sub">0 completed this week</p>
+            </article>
+
+            <article class="stat-card" aria-labelledby="lbl-challenges">
+              <div class="stat-header">
+                <div class="stat-icon-box stat-icon-box--accent" aria-hidden="true">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+                  </svg>
+                </div>
+                <span class="stat-trend stat-trend--neutral">Active</span>
+              </div>
+              <div class="stat-val-row">
+                <span class="stat-val" id="val-challenges" data-target="4" data-dec="0" aria-live="polite">0</span>
+                <span class="stat-unit">challenges</span>
+              </div>
+              <p class="stat-lbl" id="lbl-challenges">Eco Challenges</p>
+              <p class="stat-sub">badges earned: <span id="badges-count">0</span></p>
             </article>
 
           </div>
         </section><!-- end stats -->
 
-        <!-- ── DASHBOARD CONTENT GRID ── -->
+        <!-- DASHBOARD MODULE CARDS GRID -->
         <div class="dash-grid" aria-label="Dashboard modules">
 
           <!-- CARBON SCORE CARD -->
           <section class="dash-card card--score" aria-labelledby="score-card-heading">
             <div class="card-head">
               <h2 class="card-title" id="score-card-heading">Carbon Score</h2>
-              <span class="tag tag--warning">Below Average</span>
+              <span class="tag tag--warning" id="score-tag">Eco Explorer</span>
             </div>
 
-            <!-- SVG Progress Ring -->
-            <figure class="ring-figure" aria-label="Carbon score: 42 out of 100 — below average" role="img">
+            <figure class="ring-figure" aria-label="Carbon score: 62 out of 100" role="img">
               <svg class="ring-svg" viewBox="0 0 160 160" aria-hidden="true">
                 <defs>
                   <linearGradient id="ring-grad" x1="0" y1="0" x2="1" y2="1">
-                    <stop offset="0%"   stop-color="hsl(38,92%,56%)"/>
-                    <stop offset="50%"  stop-color="hsl(142,71%,49%)"/>
-                    <stop offset="100%" stop-color="hsl(191,91%,52%)"/>
+                    <stop offset="0%"   stop-color="hsl(142,71%,58%)"/>
+                    <stop offset="50%"  stop-color="hsl(191,91%,52%)"/>
+                    <stop offset="100%" stop-color="hsl(142,71%,49%)"/>
                   </linearGradient>
                 </defs>
-                <!-- Background track -->
                 <circle class="ring-track" cx="80" cy="80" r="62"
                   fill="none" stroke="hsl(222,14%,20%)" stroke-width="11"/>
-                <!-- Animated fill -->
                 <circle class="ring-fill" id="ring-fill" cx="80" cy="80" r="62"
                   fill="none" stroke="url(#ring-grad)" stroke-width="11"
                   stroke-linecap="round"
@@ -487,7 +442,7 @@
                   transform="rotate(-90 80 80)"/>
               </svg>
               <div class="ring-center" aria-hidden="true">
-                <span class="ring-score gradient-text" id="ring-score">42</span>
+                <span class="ring-score gradient-text" id="ring-score">62</span>
                 <span class="ring-label">/ 100</span>
               </div>
             </figure>
@@ -496,28 +451,28 @@
             <div class="breakdown" role="list" aria-label="Footprint breakdown by category">
               <div class="breakdown-row" role="listitem">
                 <span class="bk-label">Transport</span>
-                <div class="bk-track" role="progressbar" aria-valuenow="38" aria-valuemin="0" aria-valuemax="100" aria-label="Transport: 38% of footprint">
+                <div class="bk-track" role="progressbar" aria-valuenow="38" aria-valuemin="0" aria-valuemax="100" aria-label="Transport: 38%">
                   <div class="bk-fill" style="--w:38%;--c:hsl(4,86%,58%)"></div>
                 </div>
                 <span class="bk-pct">38%</span>
               </div>
               <div class="breakdown-row" role="listitem">
                 <span class="bk-label">Food</span>
-                <div class="bk-track" role="progressbar" aria-valuenow="27" aria-valuemin="0" aria-valuemax="100" aria-label="Food: 27% of footprint">
+                <div class="bk-track" role="progressbar" aria-valuenow="27" aria-valuemin="0" aria-valuemax="100" aria-label="Food: 27%">
                   <div class="bk-fill" style="--w:27%;--c:hsl(38,92%,52%)"></div>
                 </div>
                 <span class="bk-pct">27%</span>
               </div>
               <div class="breakdown-row" role="listitem">
                 <span class="bk-label">Home</span>
-                <div class="bk-track" role="progressbar" aria-valuenow="22" aria-valuemin="0" aria-valuemax="100" aria-label="Home energy: 22% of footprint">
+                <div class="bk-track" role="progressbar" aria-valuenow="22" aria-valuemin="0" aria-valuemax="100" aria-label="Home energy: 22%">
                   <div class="bk-fill" style="--w:22%;--c:hsl(217,91%,60%)"></div>
                 </div>
                 <span class="bk-pct">22%</span>
               </div>
               <div class="breakdown-row" role="listitem">
                 <span class="bk-label">Other</span>
-                <div class="bk-track" role="progressbar" aria-valuenow="13" aria-valuemin="0" aria-valuemax="100" aria-label="Other: 13% of footprint">
+                <div class="bk-track" role="progressbar" aria-valuenow="13" aria-valuemin="0" aria-valuemax="100" aria-label="Other: 13%">
                   <div class="bk-fill" style="--w:13%;--c:hsl(263,70%,60%)"></div>
                 </div>
                 <span class="bk-pct">13%</span>
@@ -526,14 +481,14 @@
 
             <p class="score-note">
               <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
-              Sample data. <a href="#calculator" class="inline-link" data-module="calculator">Calculate your real score →</a>
+              Take the <a href="#assessment" class="inline-link" data-module="assessment">Eco Assessment →</a> for real data
             </p>
           </section>
 
           <!-- WEEKLY TREND CHART -->
           <section class="dash-card card--chart" aria-labelledby="chart-heading">
             <div class="card-head">
-              <h2 class="card-title" id="chart-heading">Weekly Carbon Trend</h2>
+              <h2 class="card-title" id="chart-heading">Eco Progress Trend</h2>
               <div class="period-tabs" role="tablist" aria-label="Chart time period">
                 <button class="period-tab active" role="tab" aria-selected="true"  data-period="week" id="tab-week">Week</button>
                 <button class="period-tab"        role="tab" aria-selected="false" data-period="month" id="tab-month">Month</button>
@@ -544,31 +499,30 @@
             <div class="chart-wrap">
               <canvas id="weekly-chart"
                 role="img"
-                aria-label="Line chart: weekly carbon emissions. Average 21.1 kg CO₂e per day this week.">
+                aria-label="Line chart showing eco score progress over time.">
               </canvas>
             </div>
 
-            <!-- Accessible data table (screen readers) -->
-            <table class="sr-only" aria-label="Weekly carbon emissions data">
-              <caption>Carbon emissions for the past 7 days</caption>
-              <thead><tr><th scope="col">Day</th><th scope="col">Emissions (kg CO₂e)</th></tr></thead>
+            <table class="sr-only" aria-label="Eco score progress data">
+              <caption>Eco score for the past 7 days</caption>
+              <thead><tr><th scope="col">Day</th><th scope="col">Eco Score</th></tr></thead>
               <tbody id="chart-table"></tbody>
             </table>
 
             <div class="chart-footer">
               <div class="chart-metric">
-                <span class="chart-metric-val">22.4 kg</span>
-                <span class="chart-metric-lbl">avg / day</span>
+                <span class="chart-metric-val">62</span>
+                <span class="chart-metric-lbl">current score</span>
               </div>
               <div class="chart-divider" aria-hidden="true"></div>
               <div class="chart-metric">
-                <span class="chart-metric-val chart-metric-val--good">↓ 8%</span>
+                <span class="chart-metric-val chart-metric-val--good">↑ 12%</span>
                 <span class="chart-metric-lbl">vs last week</span>
               </div>
               <div class="chart-divider" aria-hidden="true"></div>
               <div class="chart-metric">
-                <span class="chart-metric-val">156.6 kg</span>
-                <span class="chart-metric-lbl">this week total</span>
+                <span class="chart-metric-val">Eco Explorer</span>
+                <span class="chart-metric-lbl">current persona</span>
               </div>
             </div>
           </section>
@@ -582,8 +536,7 @@
               </div>
               <button class="icon-btn" id="refresh-fact" aria-label="Load next eco fact">
                 <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                  <polyline points="23 4 23 10 17 10"/>
-                  <polyline points="1 20 1 14 7 14"/>
+                  <polyline points="23 4 23 10 17 10"/><polyline points="1 20 1 14 7 14"/>
                   <path d="M3.51 9a9 9 0 0114.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0020.49 15"/>
                 </svg>
               </button>
@@ -614,25 +567,25 @@
             </footer>
           </section>
 
-          <!-- QUICK ACTIONS / EXPLORE MODULES -->
+          <!-- QUICK ACCESS MODULES -->
           <section class="dash-card card--actions" aria-labelledby="actions-heading">
             <div class="card-head">
               <h2 class="card-title" id="actions-heading">Explore Modules</h2>
-              <span class="tag tag--brand">11 modules</span>
+              <span class="tag tag--brand">8 modules</span>
             </div>
 
             <ul class="actions-list" role="list" aria-label="Application modules">
 
               <li role="listitem">
                 <a href="#assessment" class="action-item" data-module="assessment"
-                  aria-label="Lifestyle DNA Assessment — Discover your eco persona">
+                  aria-label="Eco Personality Assessment — Discover your eco persona">
                   <div class="action-icon" style="--ibg:hsl(263,60%,18%);--iclr:hsl(263,70%,68%)" aria-hidden="true">
                     <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                       <path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"/>
                     </svg>
                   </div>
                   <div class="action-text">
-                    <h3 class="action-name">Lifestyle DNA</h3>
+                    <h3 class="action-name">Eco Personality</h3>
                     <p class="action-desc">Discover your eco persona</p>
                   </div>
                   <svg class="action-arr" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
@@ -640,70 +593,32 @@
               </li>
 
               <li role="listitem">
-                <a href="#calculator" class="action-item" data-module="calculator"
-                  aria-label="Carbon Calculator — Measure your exact footprint">
+                <a href="#blindspot" class="action-item" data-module="blindspot"
+                  aria-label="Carbon Blind Spot Detector — Find hidden carbon contributors">
+                  <div class="action-icon" style="--ibg:hsl(4,60%,14%);--iclr:hsl(4,86%,65%)" aria-hidden="true">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                      <circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="16"/><line x1="8" y1="12" x2="16" y2="12"/>
+                    </svg>
+                  </div>
+                  <div class="action-text">
+                    <h3 class="action-name">Blind Spot Detector</h3>
+                    <p class="action-desc">Find hidden carbon contributors</p>
+                  </div>
+                  <svg class="action-arr" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                </a>
+              </li>
+
+              <li role="listitem">
+                <a href="#learning" class="action-item action-item--highlight" data-module="learning"
+                  aria-label="Sustainability Learning Hub — Daily eco facts and tips">
                   <div class="action-icon" style="--ibg:hsl(142,60%,10%);--iclr:hsl(142,71%,52%)" aria-hidden="true">
                     <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                      <rect x="4" y="2" width="16" height="20" rx="2"/>
-                      <line x1="8" y1="6" x2="16" y2="6"/>
-                      <line x1="8" y1="10" x2="10" y2="10"/><line x1="12" y1="10" x2="14" y2="10"/>
+                      <path d="M2 3h6a4 4 0 014 4v14a3 3 0 00-3-3H2z"/><path d="M22 3h-6a4 4 0 00-4 4v14a3 3 0 013-3h7z"/>
                     </svg>
                   </div>
                   <div class="action-text">
-                    <h3 class="action-name">Carbon Calculator</h3>
-                    <p class="action-desc">Measure your exact footprint</p>
-                  </div>
-                  <svg class="action-arr" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-                </a>
-              </li>
-
-              <li role="listitem">
-                <a href="#roadmap" class="action-item" data-module="roadmap"
-                  aria-label="AI Action Roadmap — Your personalised action plan">
-                  <div class="action-icon" style="--ibg:hsl(191,70%,10%);--iclr:hsl(191,91%,55%)" aria-hidden="true">
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                      <circle cx="5" cy="6" r="1.5" fill="currentColor"/><line x1="7" y1="6" x2="20" y2="6"/>
-                      <circle cx="19" cy="12" r="1.5" fill="currentColor"/><line x1="4" y1="12" x2="17" y2="12"/>
-                      <circle cx="5" cy="18" r="1.5" fill="currentColor"/><line x1="7" y1="18" x2="20" y2="18"/>
-                    </svg>
-                  </div>
-                  <div class="action-text">
-                    <h3 class="action-name">AI Roadmap</h3>
-                    <p class="action-desc">Your personalised action plan</p>
-                  </div>
-                  <svg class="action-arr" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-                </a>
-              </li>
-
-              <li role="listitem">
-                <a href="#challenges" class="action-item action-item--highlight" data-module="challenges"
-                  aria-label="Eco Challenges — 3 active challenges this week">
-                  <div class="action-icon" style="--ibg:hsl(38,70%,10%);--iclr:hsl(38,92%,58%)" aria-hidden="true">
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                      <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
-                    </svg>
-                  </div>
-                  <div class="action-text">
-                    <h3 class="action-name">Eco Challenges</h3>
-                    <p class="action-desc"><span class="active-pill" aria-label="3 active challenges">3 active</span> this week</p>
-                  </div>
-                  <svg class="action-arr" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-                </a>
-              </li>
-
-              <li role="listitem">
-                <a href="#quiz" class="action-item" data-module="quiz"
-                  aria-label="Carbon Quiz — Test your eco knowledge">
-                  <div class="action-icon" style="--ibg:hsl(4,60%,10%);--iclr:hsl(4,86%,65%)" aria-hidden="true">
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                      <path d="M9.09 9a3 3 0 015.83 1c0 2-3 3-3 3"/>
-                      <line x1="12" y1="17" x2="12.01" y2="17"/>
-                      <circle cx="12" cy="12" r="10"/>
-                    </svg>
-                  </div>
-                  <div class="action-text">
-                    <h3 class="action-name">Carbon Quiz</h3>
-                    <p class="action-desc">Test your eco knowledge</p>
+                    <h3 class="action-name">Learning Hub</h3>
+                    <p class="action-desc">Daily facts & sustainability tips</p>
                   </div>
                   <svg class="action-arr" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
                 </a>
@@ -711,15 +626,79 @@
 
               <li role="listitem">
                 <a href="#simulator" class="action-item" data-module="simulator"
-                  aria-label="Reality Simulator — See your future carbon impact">
-                  <div class="action-icon" style="--ibg:hsl(217,60%,10%);--iclr:hsl(217,91%,65%)" aria-hidden="true">
+                  aria-label="Impact Simulator — See the effect of lifestyle changes">
+                  <div class="action-icon" style="--ibg:hsl(191,70%,10%);--iclr:hsl(191,91%,55%)" aria-hidden="true">
                     <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                       <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/>
                     </svg>
                   </div>
                   <div class="action-text">
-                    <h3 class="action-name">Reality Simulator</h3>
-                    <p class="action-desc">See your future impact</p>
+                    <h3 class="action-name">Impact Simulator</h3>
+                    <p class="action-desc">See effect of lifestyle changes</p>
+                  </div>
+                  <svg class="action-arr" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                </a>
+              </li>
+
+              <li role="listitem">
+                <a href="#missions" class="action-item" data-module="missions"
+                  aria-label="Weekly Missions — Personalized eco missions">
+                  <div class="action-icon" style="--ibg:hsl(38,70%,10%);--iclr:hsl(38,92%,58%)" aria-hidden="true">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                      <path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/>
+                    </svg>
+                  </div>
+                  <div class="action-text">
+                    <h3 class="action-name">Weekly Missions</h3>
+                    <p class="action-desc"><span class="active-pill" aria-label="3 active missions">3 active</span> this week</p>
+                  </div>
+                  <svg class="action-arr" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                </a>
+              </li>
+
+              <li role="listitem">
+                <a href="#habits" class="action-item" data-module="habits"
+                  aria-label="Habit Tracker — Build sustainable daily habits">
+                  <div class="action-icon" style="--ibg:hsl(217,60%,10%);--iclr:hsl(217,91%,65%)" aria-hidden="true">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                      <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/>
+                    </svg>
+                  </div>
+                  <div class="action-text">
+                    <h3 class="action-name">Habit Tracker</h3>
+                    <p class="action-desc">Build sustainable daily habits</p>
+                  </div>
+                  <svg class="action-arr" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                </a>
+              </li>
+
+              <li role="listitem">
+                <a href="#challenges" class="action-item" data-module="challenges"
+                  aria-label="Eco Challenges — Take on sustainability challenges">
+                  <div class="action-icon" style="--ibg:hsl(280,60%,14%);--iclr:hsl(280,70%,68%)" aria-hidden="true">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                      <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+                    </svg>
+                  </div>
+                  <div class="action-text">
+                    <h3 class="action-name">Eco Challenges</h3>
+                    <p class="action-desc">Earn badges & achievements</p>
+                  </div>
+                  <svg class="action-arr" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                </a>
+              </li>
+
+              <li role="listitem">
+                <a href="#story" class="action-item" data-module="story"
+                  aria-label="My Eco Story — See your personalized sustainability narrative">
+                  <div class="action-icon" style="--ibg:hsl(38,60%,10%);--iclr:hsl(38,92%,65%)" aria-hidden="true">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                      <path d="M12 2C6.477 2 2 6.477 2 12s4.477 10 10 10 10-4.477 10-10S17.523 2 12 2z"/><path d="M8 12s1.5 2 4 2 4-2 4-2"/>
+                    </svg>
+                  </div>
+                  <div class="action-text">
+                    <h3 class="action-name">My Eco Story</h3>
+                    <p class="action-desc">Your sustainability narrative</p>
                   </div>
                   <svg class="action-arr" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
                 </a>
@@ -736,9 +715,7 @@
 
   </div><!-- end app-shell -->
 
-  <!-- ══════════════════════════════════════════
-       MOBILE BOTTOM NAVIGATION
-  ══════════════════════════════════════════ -->
+  <!-- MOBILE BOTTOM NAVIGATION -->
   <nav class="bottom-nav" id="bottom-nav" aria-label="Mobile navigation">
     <a href="#dashboard" class="tab-item active" data-module="dashboard" aria-label="Dashboard" aria-current="page">
       <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
@@ -747,44 +724,42 @@
       </svg>
       <span>Home</span>
     </a>
-    <a href="#calculator" class="tab-item" data-module="calculator" aria-label="Carbon Calculator">
+    <a href="#assessment" class="tab-item" data-module="assessment" aria-label="Eco Personality Assessment">
       <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-        <rect x="4" y="2" width="16" height="20" rx="2"/><line x1="8" y1="6" x2="16" y2="6"/>
+        <path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"/>
       </svg>
-      <span>Calculate</span>
+      <span>Assess</span>
     </a>
-    <a href="#challenges" class="tab-item" data-module="challenges" aria-label="Eco Challenges — 3 active">
-      <div class="tab-badge" aria-hidden="true">3</div>
+    <a href="#habits" class="tab-item" data-module="habits" aria-label="Habit Tracker">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/>
+        <line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/>
+      </svg>
+      <span>Habits</span>
+    </a>
+    <a href="#challenges" class="tab-item" data-module="challenges" aria-label="Eco Challenges">
       <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
         <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
       </svg>
       <span>Challenges</span>
     </a>
-    <a href="#progress" class="tab-item" data-module="progress" aria-label="Progress Tracking">
+    <a href="#learning" class="tab-item" data-module="learning" aria-label="Learning Hub">
       <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-        <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/>
+        <path d="M2 3h6a4 4 0 014 4v14a3 3 0 00-3-3H2z"/><path d="M22 3h-6a4 4 0 00-4 4v14a3 3 0 013-3h7z"/>
       </svg>
-      <span>Progress</span>
-    </a>
-    <a href="#profile" class="tab-item" data-module="profile" aria-label="User Profile">
-      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-        <path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/>
-        <circle cx="12" cy="7" r="4"/>
-      </svg>
-      <span>Profile</span>
+      <span>Learn</span>
     </a>
   </nav>
 
-  <!-- ══════════════════════════════════════════
-       TOAST NOTIFICATION CONTAINER
-  ══════════════════════════════════════════ -->
+  <!-- TOAST CONTAINER -->
   <div id="toast-container" class="toast-container" role="status" aria-live="polite" aria-relevant="additions text"></div>
 
   <!-- Mobile sidebar overlay -->
   <div class="sidebar-overlay" id="sidebar-overlay" aria-hidden="true"></div>
 
+
   <!-- ══════════════════════════════════════════
-       LIFESTYLE DNA ASSESSMENT MODULE
+       MODULE 1: ECO PERSONALITY ASSESSMENT
   ══════════════════════════════════════════ -->
   <div id="assessment-view"
        class="module-view"
@@ -795,7 +770,7 @@
 
     <div class="assess-shell">
 
-      <!-- ─── HEADER ─── -->
+      <!-- HEADER -->
       <header class="assess-header">
 
         <button class="assess-icon-btn" id="assess-back"
@@ -805,9 +780,7 @@
         </button>
 
         <div class="assess-progress-wrap" aria-label="Assessment progress">
-          <div class="assess-step-dots" id="assess-step-dots" aria-hidden="true">
-            <!-- 5 dots built by JS -->
-          </div>
+          <div class="assess-step-dots" id="assess-step-dots" aria-hidden="true"></div>
           <div class="assess-progress-track">
             <div class="assess-progress-bar"
                  id="assess-progress-bar"
@@ -828,14 +801,12 @@
           <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
         </button>
 
-      </header><!-- end assess-header -->
+      </header>
 
-      <!-- ─── SCROLLABLE STEP AREA ─── -->
+      <!-- SCROLLABLE STEP AREA -->
       <main class="assess-main" id="assess-main" tabindex="-1">
 
-        <!-- ────────────────────────────────
-             STEP 0 — Introduction / Welcome
-        ──────────────────────────────────── -->
+        <!-- STEP 0 — Introduction -->
         <section class="assess-step is-active"
                  id="assess-step-0" data-step="0"
                  aria-labelledby="assess-dialog-title"
@@ -845,24 +816,16 @@
             <div class="intro-icon" aria-hidden="true">🧬</div>
             <h1 class="assess-intro-title" id="assess-dialog-title">
               Discover Your<br>
-              <span class="gradient-text">Eco DNA</span>
+              <span class="gradient-text">Eco Persona</span>
             </h1>
             <p class="assess-intro-body">
-              Answer 5 quick questions about your lifestyle habits. We'll calculate your personal carbon footprint profile and match you to an Eco Persona.
+              Answer 6 quick questions about your lifestyle habits. We'll generate your personal carbon footprint profile and match you to your unique Eco Persona.
             </p>
             <ul class="intro-features" role="list">
-              <li role="listitem">
-                <span class="intro-feat-icon" aria-hidden="true">⚡</span>
-                <span>Takes only 2 minutes</span>
-              </li>
-              <li role="listitem">
-                <span class="intro-feat-icon" aria-hidden="true">🔒</span>
-                <span>All data stays on your device</span>
-              </li>
-              <li role="listitem">
-                <span class="intro-feat-icon" aria-hidden="true">🎯</span>
-                <span>Get a personalised action plan</span>
-              </li>
+              <li role="listitem"><span class="intro-feat-icon" aria-hidden="true">⚡</span><span>Takes only 2 minutes</span></li>
+              <li role="listitem"><span class="intro-feat-icon" aria-hidden="true">🔒</span><span>All data stays on your device</span></li>
+              <li role="listitem"><span class="intro-feat-icon" aria-hidden="true">🎯</span><span>Get a personalised action plan</span></li>
+              <li role="listitem"><span class="intro-feat-icon" aria-hidden="true">🌱</span><span>Discover your sustainability story</span></li>
             </ul>
             <div class="prev-result" id="prev-result" hidden>
               <span class="prev-result-badge">Your last result:</span>
@@ -872,22 +835,19 @@
           </div>
         </section>
 
-        <!-- ────────────────────────────────
-             STEP 1 — Transportation
-        ──────────────────────────────────── -->
+        <!-- STEP 1 — Transportation -->
         <section class="assess-step"
                  id="assess-step-1" data-step="1"
                  aria-labelledby="step1-heading"
                  aria-hidden="true">
           <div class="assess-q-wrap">
-            <div class="assess-step-badge" aria-hidden="true">1 / 5</div>
+            <div class="assess-step-badge" aria-hidden="true">1 / 6</div>
             <h2 class="assess-q-title" id="step1-heading">How do you primarily get around?</h2>
-            <p class="assess-q-sub">Choose your most frequent mode of daily transport</p>
+            <p class="assess-q-sub">Transportation is one of the biggest sources of individual carbon emissions</p>
 
             <fieldset class="option-fieldset" id="fieldset-transport">
               <legend class="sr-only">Transportation mode — required, choose one</legend>
               <div class="option-grid">
-
                 <label class="option-card" for="opt-car">
                   <input class="option-input" type="radio" id="opt-car" name="transport" value="car" aria-describedby="opt-car-impact">
                   <div class="option-card-inner">
@@ -896,9 +856,7 @@
                       <span class="option-name">Private Car</span>
                       <span class="option-desc">Daily driving as main mode</span>
                     </div>
-                    <span class="option-check-mark" aria-hidden="true">
-                      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
-                    </span>
+                    <span class="option-check-mark" aria-hidden="true"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>
                     <span class="option-impact-tag" id="opt-car-impact" aria-label="High carbon impact">High CO₂</span>
                   </div>
                 </label>
@@ -908,12 +866,10 @@
                   <div class="option-card-inner">
                     <div class="option-icon-wrap" aria-hidden="true"><span class="option-emoji">🚴</span></div>
                     <div class="option-text-wrap">
-                      <span class="option-name">Bicycle</span>
-                      <span class="option-desc">Cycling for daily commuting</span>
+                      <span class="option-name">Bicycle / Walk</span>
+                      <span class="option-desc">Cycling or walking daily</span>
                     </div>
-                    <span class="option-check-mark" aria-hidden="true">
-                      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
-                    </span>
+                    <span class="option-check-mark" aria-hidden="true"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>
                     <span class="option-impact-tag option-impact-tag--low" id="opt-bike-impact" aria-label="Zero carbon impact">Zero CO₂</span>
                   </div>
                 </label>
@@ -926,13 +882,10 @@
                       <span class="option-name">Public Transit</span>
                       <span class="option-desc">Bus, metro or train daily</span>
                     </div>
-                    <span class="option-check-mark" aria-hidden="true">
-                      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
-                    </span>
+                    <span class="option-check-mark" aria-hidden="true"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>
                     <span class="option-impact-tag option-impact-tag--med" id="opt-public-impact" aria-label="Low carbon impact">Low CO₂</span>
                   </div>
                 </label>
-
               </div>
               <p class="field-error" id="error-transport" role="alert" aria-live="assertive" hidden>
                 <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
@@ -942,33 +895,28 @@
           </div>
         </section>
 
-        <!-- ────────────────────────────────
-             STEP 2 — Food Habits
-        ──────────────────────────────────── -->
+        <!-- STEP 2 — Food Habits -->
         <section class="assess-step"
                  id="assess-step-2" data-step="2"
                  aria-labelledby="step2-heading"
                  aria-hidden="true">
           <div class="assess-q-wrap">
-            <div class="assess-step-badge" aria-hidden="true">2 / 5</div>
+            <div class="assess-step-badge" aria-hidden="true">2 / 6</div>
             <h2 class="assess-q-title" id="step2-heading">What best describes your diet?</h2>
             <p class="assess-q-sub">Food production is one of the biggest sources of carbon emissions</p>
 
             <fieldset class="option-fieldset" id="fieldset-food">
               <legend class="sr-only">Food diet — required, choose one</legend>
               <div class="option-grid">
-
                 <label class="option-card" for="opt-vegetarian">
                   <input class="option-input" type="radio" id="opt-vegetarian" name="food" value="vegetarian" aria-describedby="opt-veg-impact">
                   <div class="option-card-inner">
                     <div class="option-icon-wrap" aria-hidden="true"><span class="option-emoji">🥦</span></div>
                     <div class="option-text-wrap">
-                      <span class="option-name">Vegetarian</span>
+                      <span class="option-name">Vegetarian / Vegan</span>
                       <span class="option-desc">Plant-based, no meat</span>
                     </div>
-                    <span class="option-check-mark" aria-hidden="true">
-                      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
-                    </span>
+                    <span class="option-check-mark" aria-hidden="true"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>
                     <span class="option-impact-tag option-impact-tag--low" id="opt-veg-impact">Low CO₂</span>
                   </div>
                 </label>
@@ -981,9 +929,7 @@
                       <span class="option-name">Mixed Diet</span>
                       <span class="option-desc">Balanced with occasional meat</span>
                     </div>
-                    <span class="option-check-mark" aria-hidden="true">
-                      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
-                    </span>
+                    <span class="option-check-mark" aria-hidden="true"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>
                     <span class="option-impact-tag option-impact-tag--med" id="opt-mixed-impact">Med CO₂</span>
                   </div>
                 </label>
@@ -996,13 +942,10 @@
                       <span class="option-name">Non-Vegetarian</span>
                       <span class="option-desc">Regular meat consumption</span>
                     </div>
-                    <span class="option-check-mark" aria-hidden="true">
-                      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
-                    </span>
+                    <span class="option-check-mark" aria-hidden="true"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>
                     <span class="option-impact-tag" id="opt-nonveg-impact">High CO₂</span>
                   </div>
                 </label>
-
               </div>
               <p class="field-error" id="error-food" role="alert" aria-live="assertive" hidden>
                 <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
@@ -1012,22 +955,19 @@
           </div>
         </section>
 
-        <!-- ────────────────────────────────
-             STEP 3 — Home Electricity
-        ──────────────────────────────────── -->
+        <!-- STEP 3 — Home Electricity -->
         <section class="assess-step"
                  id="assess-step-3" data-step="3"
                  aria-labelledby="step3-heading"
                  aria-hidden="true">
           <div class="assess-q-wrap">
-            <div class="assess-step-badge" aria-hidden="true">3 / 5</div>
+            <div class="assess-step-badge" aria-hidden="true">3 / 6</div>
             <h2 class="assess-q-title" id="step3-heading">How much electricity does your home use?</h2>
             <p class="assess-q-sub">Consider lighting, appliances, heating and cooling</p>
 
             <fieldset class="option-fieldset" id="fieldset-electricity">
               <legend class="sr-only">Home electricity usage — required, choose one</legend>
               <div class="option-grid">
-
                 <label class="option-card" for="opt-elec-low">
                   <input class="option-input" type="radio" id="opt-elec-low" name="electricity" value="low" aria-describedby="opt-elec-low-impact">
                   <div class="option-card-inner">
@@ -1036,9 +976,7 @@
                       <span class="option-name">Low Usage</span>
                       <span class="option-desc">LED lights, minimal appliances</span>
                     </div>
-                    <span class="option-check-mark" aria-hidden="true">
-                      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
-                    </span>
+                    <span class="option-check-mark" aria-hidden="true"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>
                     <span class="option-impact-tag option-impact-tag--low" id="opt-elec-low-impact">Low CO₂</span>
                   </div>
                 </label>
@@ -1051,9 +989,7 @@
                       <span class="option-name">Medium Usage</span>
                       <span class="option-desc">Average household consumption</span>
                     </div>
-                    <span class="option-check-mark" aria-hidden="true">
-                      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
-                    </span>
+                    <span class="option-check-mark" aria-hidden="true"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>
                     <span class="option-impact-tag option-impact-tag--med" id="opt-elec-med-impact">Med CO₂</span>
                   </div>
                 </label>
@@ -1066,13 +1002,10 @@
                       <span class="option-name">High Usage</span>
                       <span class="option-desc">Heavy appliance or AC use</span>
                     </div>
-                    <span class="option-check-mark" aria-hidden="true">
-                      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
-                    </span>
+                    <span class="option-check-mark" aria-hidden="true"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>
                     <span class="option-impact-tag" id="opt-elec-high-impact">High CO₂</span>
                   </div>
                 </label>
-
               </div>
               <p class="field-error" id="error-electricity" role="alert" aria-live="assertive" hidden>
                 <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
@@ -1082,22 +1015,19 @@
           </div>
         </section>
 
-        <!-- ────────────────────────────────
-             STEP 4 — Shopping Habits
-        ──────────────────────────────────── -->
+        <!-- STEP 4 — Shopping Habits -->
         <section class="assess-step"
                  id="assess-step-4" data-step="4"
                  aria-labelledby="step4-heading"
                  aria-hidden="true">
           <div class="assess-q-wrap">
-            <div class="assess-step-badge" aria-hidden="true">4 / 5</div>
+            <div class="assess-step-badge" aria-hidden="true">4 / 6</div>
             <h2 class="assess-q-title" id="step4-heading">How would you describe your shopping habits?</h2>
             <p class="assess-q-sub">Consumer goods account for up to 45% of global carbon emissions</p>
 
             <fieldset class="option-fieldset" id="fieldset-shopping">
               <legend class="sr-only">Shopping habits — required, choose one</legend>
               <div class="option-grid">
-
                 <label class="option-card" for="opt-shop-low">
                   <input class="option-input" type="radio" id="opt-shop-low" name="shopping" value="low" aria-describedby="opt-shop-low-impact">
                   <div class="option-card-inner">
@@ -1106,9 +1036,7 @@
                       <span class="option-name">Minimal</span>
                       <span class="option-desc">Buy only necessities, prefer secondhand</span>
                     </div>
-                    <span class="option-check-mark" aria-hidden="true">
-                      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
-                    </span>
+                    <span class="option-check-mark" aria-hidden="true"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>
                     <span class="option-impact-tag option-impact-tag--low" id="opt-shop-low-impact">Low CO₂</span>
                   </div>
                 </label>
@@ -1121,9 +1049,7 @@
                       <span class="option-name">Moderate</span>
                       <span class="option-desc">Occasional new purchases</span>
                     </div>
-                    <span class="option-check-mark" aria-hidden="true">
-                      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
-                    </span>
+                    <span class="option-check-mark" aria-hidden="true"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>
                     <span class="option-impact-tag option-impact-tag--med" id="opt-shop-med-impact">Med CO₂</span>
                   </div>
                 </label>
@@ -1136,13 +1062,10 @@
                       <span class="option-name">Heavy Shopper</span>
                       <span class="option-desc">Frequent new purchases, fast fashion</span>
                     </div>
-                    <span class="option-check-mark" aria-hidden="true">
-                      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
-                    </span>
+                    <span class="option-check-mark" aria-hidden="true"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>
                     <span class="option-impact-tag" id="opt-shop-high-impact">High CO₂</span>
                   </div>
                 </label>
-
               </div>
               <p class="field-error" id="error-shopping" role="alert" aria-live="assertive" hidden>
                 <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
@@ -1152,22 +1075,19 @@
           </div>
         </section>
 
-        <!-- ────────────────────────────────
-             STEP 5 — Waste Management
-        ──────────────────────────────────── -->
+        <!-- STEP 5 — Waste Management -->
         <section class="assess-step"
                  id="assess-step-5" data-step="5"
                  aria-labelledby="step5-heading"
                  aria-hidden="true">
           <div class="assess-q-wrap">
-            <div class="assess-step-badge" aria-hidden="true">5 / 5</div>
+            <div class="assess-step-badge" aria-hidden="true">5 / 6</div>
             <h2 class="assess-q-title" id="step5-heading">How do you handle household waste?</h2>
             <p class="assess-q-sub">Landfill waste produces methane — a potent greenhouse gas</p>
 
             <fieldset class="option-fieldset" id="fieldset-waste">
               <legend class="sr-only">Waste management habits — required, choose one</legend>
               <div class="option-grid">
-
                 <label class="option-card" for="opt-waste-low">
                   <input class="option-input" type="radio" id="opt-waste-low" name="waste" value="low" aria-describedby="opt-waste-low-impact">
                   <div class="option-card-inner">
@@ -1176,9 +1096,7 @@
                       <span class="option-name">Low Waste</span>
                       <span class="option-desc">Actively recycles &amp; composts</span>
                     </div>
-                    <span class="option-check-mark" aria-hidden="true">
-                      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
-                    </span>
+                    <span class="option-check-mark" aria-hidden="true"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>
                     <span class="option-impact-tag option-impact-tag--low" id="opt-waste-low-impact">Low CO₂</span>
                   </div>
                 </label>
@@ -1191,9 +1109,7 @@
                       <span class="option-name">Average Waste</span>
                       <span class="option-desc">Some recycling, average output</span>
                     </div>
-                    <span class="option-check-mark" aria-hidden="true">
-                      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
-                    </span>
+                    <span class="option-check-mark" aria-hidden="true"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>
                     <span class="option-impact-tag option-impact-tag--med" id="opt-waste-med-impact">Med CO₂</span>
                   </div>
                 </label>
@@ -1206,13 +1122,10 @@
                       <span class="option-name">High Waste</span>
                       <span class="option-desc">Minimal recycling, high landfill</span>
                     </div>
-                    <span class="option-check-mark" aria-hidden="true">
-                      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
-                    </span>
+                    <span class="option-check-mark" aria-hidden="true"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>
                     <span class="option-impact-tag" id="opt-waste-high-impact">High CO₂</span>
                   </div>
                 </label>
-
               </div>
               <p class="field-error" id="error-waste" role="alert" aria-live="assertive" hidden>
                 <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
@@ -1222,22 +1135,79 @@
           </div>
         </section>
 
-        <!-- ────────────────────────────────
-             STEP 6 — Results / Persona
-        ──────────────────────────────────── -->
+        <!-- STEP 6 — Water Usage -->
         <section class="assess-step"
-                 id="assess-step-results" data-step="6"
+                 id="assess-step-6" data-step="6"
+                 aria-labelledby="step6-heading"
+                 aria-hidden="true">
+          <div class="assess-q-wrap">
+            <div class="assess-step-badge" aria-hidden="true">6 / 6</div>
+            <h2 class="assess-q-title" id="step6-heading">How conscious are you about water usage?</h2>
+            <p class="assess-q-sub">Water treatment and heating accounts for significant energy use</p>
+
+            <fieldset class="option-fieldset" id="fieldset-water">
+              <legend class="sr-only">Water usage habits — required, choose one</legend>
+              <div class="option-grid">
+                <label class="option-card" for="opt-water-low">
+                  <input class="option-input" type="radio" id="opt-water-low" name="water" value="low" aria-describedby="opt-water-low-impact">
+                  <div class="option-card-inner">
+                    <div class="option-icon-wrap" aria-hidden="true"><span class="option-emoji">💧</span></div>
+                    <div class="option-text-wrap">
+                      <span class="option-name">Water Conscious</span>
+                      <span class="option-desc">Short showers, fix leaks, rain harvesting</span>
+                    </div>
+                    <span class="option-check-mark" aria-hidden="true"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>
+                    <span class="option-impact-tag option-impact-tag--low" id="opt-water-low-impact">Low CO₂</span>
+                  </div>
+                </label>
+
+                <label class="option-card" for="opt-water-med">
+                  <input class="option-input" type="radio" id="opt-water-med" name="water" value="medium" aria-describedby="opt-water-med-impact">
+                  <div class="option-card-inner">
+                    <div class="option-icon-wrap" aria-hidden="true"><span class="option-emoji">🚿</span></div>
+                    <div class="option-text-wrap">
+                      <span class="option-name">Average Usage</span>
+                      <span class="option-desc">Normal showers, some awareness</span>
+                    </div>
+                    <span class="option-check-mark" aria-hidden="true"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>
+                    <span class="option-impact-tag option-impact-tag--med" id="opt-water-med-impact">Med CO₂</span>
+                  </div>
+                </label>
+
+                <label class="option-card" for="opt-water-high">
+                  <input class="option-input" type="radio" id="opt-water-high" name="water" value="high" aria-describedby="opt-water-high-impact">
+                  <div class="option-card-inner">
+                    <div class="option-icon-wrap" aria-hidden="true"><span class="option-emoji">🛁</span></div>
+                    <div class="option-text-wrap">
+                      <span class="option-name">High Usage</span>
+                      <span class="option-desc">Long showers, baths, garden sprinklers</span>
+                    </div>
+                    <span class="option-check-mark" aria-hidden="true"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>
+                    <span class="option-impact-tag" id="opt-water-high-impact">High CO₂</span>
+                  </div>
+                </label>
+              </div>
+              <p class="field-error" id="error-water" role="alert" aria-live="assertive" hidden>
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+                Please select an option to continue.
+              </p>
+            </fieldset>
+          </div>
+        </section>
+
+        <!-- STEP RESULTS — Persona -->
+        <section class="assess-step"
+                 id="assess-step-results" data-step="7"
                  aria-labelledby="results-heading"
                  aria-hidden="true">
           <div class="assess-results">
 
-            <!-- Persona Card -->
             <div class="persona-reveal" aria-label="Your Eco Persona result">
-              <div class="persona-emoji-wrap" id="results-emoji" aria-hidden="true">🏆</div>
+              <div class="persona-emoji-wrap" id="results-emoji" aria-hidden="true">🌿</div>
               <h2 class="results-heading" id="results-heading">Your Eco Persona</h2>
               <div class="persona-card" id="persona-card">
-                <span class="persona-name" id="persona-name">Carbon Champion</span>
-                <p class="persona-headline" id="persona-headline">You're leading the way!</p>
+                <span class="persona-name" id="persona-name">Eco Explorer</span>
+                <p class="persona-headline" id="persona-headline">You're making conscious choices!</p>
                 <p class="persona-desc" id="persona-desc">Loading your results…</p>
               </div>
             </div>
@@ -1246,13 +1216,13 @@
             <div class="results-score-section">
               <div class="results-score-row">
                 <span class="results-score-lbl">Carbon Impact Score</span>
-                <span class="results-score-num" id="results-score-num" aria-live="polite">— / 15</span>
+                <span class="results-score-num" id="results-score-num" aria-live="polite">— / 18</span>
               </div>
               <div class="results-score-bar-wrap"
                    role="progressbar"
                    aria-label="Carbon impact score"
-                   aria-valuemin="5"
-                   aria-valuemax="15"
+                   aria-valuemin="6"
+                   aria-valuemax="18"
                    id="results-score-bar-el">
                 <div class="results-score-fill" id="results-score-fill"></div>
               </div>
@@ -1260,6 +1230,11 @@
                 <span>🌿 Low Impact</span>
                 <span>🔥 High Impact</span>
               </div>
+            </div>
+
+            <!-- Strengths & Improvements -->
+            <div class="results-strengths-grid" id="results-strengths-grid">
+              <!-- Populated by JS -->
             </div>
 
             <!-- Category Breakdown -->
@@ -1287,30 +1262,406 @@
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 21H5a2 2 0 01-2-2V5a2 2 0 012-2h11l5 5v11a2 2 0 01-2 2z"/><polyline points="17 21 17 13 7 13 7 21"/><polyline points="7 3 7 8 15 8"/></svg>
                 Save My Profile
               </button>
+              <button class="btn btn--ghost" id="results-story-btn">
+                🌿 Generate My Eco Story
+              </button>
               <button class="btn btn--ghost" id="results-retake-btn">
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="23 4 23 10 17 10"/><path d="M20.49 15a9 9 0 11-2.12-9.36L23 10"/></svg>
-                Retake Assessment
+                Retake
               </button>
             </div>
 
           </div>
         </section>
 
-      </main><!-- end assess-main -->
+      </main>
 
-      <!-- ─── FOOTER NAVIGATION ─── -->
+      <!-- FOOTER NAVIGATION -->
       <footer class="assess-footer" id="assess-footer">
-        <button class="btn btn--ghost" id="assess-skip" aria-label="Skip this question">
-          Skip
-        </button>
+        <button class="btn btn--ghost" id="assess-skip" aria-label="Skip this question">Skip</button>
         <button class="btn btn--primary" id="assess-next">
           Start Assessment
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
         </button>
       </footer>
 
-    </div><!-- end assess-shell -->
-  </div><!-- end assessment-view -->
+    </div>
+  </div>
+
+
+  <!-- ══════════════════════════════════════════
+       MODULE 2: CARBON BLIND SPOT DETECTOR
+  ══════════════════════════════════════════ -->
+  <div id="blindspot-view" class="module-view" role="dialog" aria-modal="true" aria-hidden="true" aria-labelledby="blindspot-title">
+    <div class="module-shell">
+      <header class="module-header">
+        <div class="module-header-left">
+          <span class="module-icon" aria-hidden="true">🔍</span>
+          <div>
+            <h1 class="module-title" id="blindspot-title">Carbon Blind Spot Detector</h1>
+            <p class="module-subtitle">Discover your hidden environmental impact contributors</p>
+          </div>
+        </div>
+        <button class="module-close" id="blindspot-close" aria-label="Close Blind Spot Detector">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+        </button>
+      </header>
+
+      <div class="module-body" id="blindspot-body">
+        <div class="blindspot-intro">
+          <div class="alert-card alert-card--info">
+            <span class="alert-icon" aria-hidden="true">💡</span>
+            <p>Many people focus on the wrong things. Take the assessment first to get personalized blind spot analysis, or explore common hidden contributors below.</p>
+          </div>
+        </div>
+
+        <!-- Perception vs Reality -->
+        <section class="bs-section" aria-labelledby="bs-perception-heading">
+          <h2 id="bs-perception-heading" class="section-title">Perception vs. Reality</h2>
+          <p class="section-desc">What people think matters vs. what actually drives their carbon footprint.</p>
+          <div class="bs-compare-grid" id="bs-compare-grid">
+            <!-- Populated by JS -->
+          </div>
+        </section>
+
+        <!-- Top Hidden Contributors -->
+        <section class="bs-section" aria-labelledby="bs-contributors-heading">
+          <h2 id="bs-contributors-heading" class="section-title">Top Hidden Contributors</h2>
+          <div class="bs-cards" id="bs-cards">
+            <!-- Populated by JS -->
+          </div>
+        </section>
+
+        <!-- Awareness Tips -->
+        <section class="bs-section" aria-labelledby="bs-tips-heading">
+          <h2 id="bs-tips-heading" class="section-title">💡 Did You Know?</h2>
+          <div class="bs-tip-rotator" id="bs-tip-rotator">
+            <div class="bs-tip-content" id="bs-tip-content" aria-live="polite">
+              <!-- Populated by JS -->
+            </div>
+            <button class="btn btn--ghost btn--sm" id="bs-next-tip">Next Insight →</button>
+          </div>
+        </section>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- ══════════════════════════════════════════
+       MODULE 3: SUSTAINABILITY LEARNING HUB
+  ══════════════════════════════════════════ -->
+  <div id="learning-view" class="module-view" role="dialog" aria-modal="true" aria-hidden="true" aria-labelledby="learning-title">
+    <div class="module-shell">
+      <header class="module-header">
+        <div class="module-header-left">
+          <span class="module-icon" aria-hidden="true">📚</span>
+          <div>
+            <h1 class="module-title" id="learning-title">Sustainability Learning Hub</h1>
+            <p class="module-subtitle">Daily eco facts, tips, and sustainability education</p>
+          </div>
+        </div>
+        <button class="module-close" id="learning-close" aria-label="Close Learning Hub">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+        </button>
+      </header>
+
+      <div class="module-body">
+
+        <!-- Category Filter -->
+        <div class="hub-filters" role="tablist" aria-label="Fact categories">
+          <button class="hub-filter active" role="tab" aria-selected="true" data-cat="all">All</button>
+          <button class="hub-filter" role="tab" aria-selected="false" data-cat="transport">🚗 Transport</button>
+          <button class="hub-filter" role="tab" aria-selected="false" data-cat="food">🍽️ Food</button>
+          <button class="hub-filter" role="tab" aria-selected="false" data-cat="energy">⚡ Energy</button>
+          <button class="hub-filter" role="tab" aria-selected="false" data-cat="nature">🌳 Nature</button>
+          <button class="hub-filter" role="tab" aria-selected="false" data-cat="water">💧 Water</button>
+          <button class="hub-filter" role="tab" aria-selected="false" data-cat="waste">♻️ Waste</button>
+        </div>
+
+        <!-- Featured Fact of the Day -->
+        <section class="hub-featured" aria-labelledby="featured-fact-heading">
+          <div class="featured-badge">✨ Fact of the Day</div>
+          <h2 id="featured-fact-heading" class="sr-only">Featured Eco Fact</h2>
+          <div class="hub-featured-card" id="hub-featured-card" aria-live="polite">
+            <!-- Populated by JS -->
+          </div>
+        </section>
+
+        <!-- Did You Know Section -->
+        <section class="hub-section" aria-labelledby="dyk-heading">
+          <h2 id="dyk-heading" class="section-title">Did You Know? 🤔</h2>
+          <div class="dyk-grid" id="dyk-grid">
+            <!-- Populated by JS -->
+          </div>
+        </section>
+
+        <!-- Facts Grid -->
+        <section class="hub-section" aria-labelledby="facts-grid-heading">
+          <div class="hub-section-header">
+            <h2 id="facts-grid-heading" class="section-title">Eco Facts Library</h2>
+            <span class="hub-count" id="hub-facts-count" aria-live="polite">Loading…</span>
+          </div>
+          <div class="hub-facts-grid" id="hub-facts-grid">
+            <!-- Populated by JS -->
+          </div>
+        </section>
+
+        <!-- Sustainability Tips -->
+        <section class="hub-section" aria-labelledby="tips-heading">
+          <h2 id="tips-heading" class="section-title">Sustainability Tips 🌱</h2>
+          <div class="hub-tips-grid" id="hub-tips-grid">
+            <!-- Populated by JS -->
+          </div>
+        </section>
+
+      </div>
+    </div>
+  </div>
+
+
+  <!-- ══════════════════════════════════════════
+       MODULE 4: ECOPERSONA STORY GENERATOR
+  ══════════════════════════════════════════ -->
+  <div id="story-view" class="module-view" role="dialog" aria-modal="true" aria-hidden="true" aria-labelledby="story-title">
+    <div class="module-shell">
+      <header class="module-header">
+        <div class="module-header-left">
+          <span class="module-icon" aria-hidden="true">📖</span>
+          <div>
+            <h1 class="module-title" id="story-title">My Eco Story</h1>
+            <p class="module-subtitle">Your personalized sustainability narrative</p>
+          </div>
+        </div>
+        <button class="module-close" id="story-close" aria-label="Close Eco Story">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+        </button>
+      </header>
+
+      <div class="module-body" id="story-body">
+        <!-- Populated by JS based on assessment data -->
+        <div class="story-no-data" id="story-no-data">
+          <div class="empty-state">
+            <div class="empty-icon" aria-hidden="true">🌱</div>
+            <h2>Take the Eco Assessment First</h2>
+            <p>Complete the Eco Personality Assessment to generate your personalized sustainability story.</p>
+            <button class="btn btn--primary" data-module="assessment" id="story-cta-assessment">
+              Take Assessment →
+            </button>
+          </div>
+        </div>
+        <div class="story-content" id="story-content" hidden>
+          <!-- Generated story content -->
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- ══════════════════════════════════════════
+       MODULE 5: PERSONALIZED WEEKLY MISSIONS
+  ══════════════════════════════════════════ -->
+  <div id="missions-view" class="module-view" role="dialog" aria-modal="true" aria-hidden="true" aria-labelledby="missions-title">
+    <div class="module-shell">
+      <header class="module-header">
+        <div class="module-header-left">
+          <span class="module-icon" aria-hidden="true">🎯</span>
+          <div>
+            <h1 class="module-title" id="missions-title">Weekly Missions</h1>
+            <p class="module-subtitle">Personalized eco actions for this week</p>
+          </div>
+        </div>
+        <button class="module-close" id="missions-close" aria-label="Close Weekly Missions">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+        </button>
+      </header>
+
+      <div class="module-body">
+
+        <!-- Mission Stats Row -->
+        <div class="missions-stats" id="missions-stats">
+          <!-- Populated by JS -->
+        </div>
+
+        <!-- Active Missions -->
+        <section aria-labelledby="active-missions-heading">
+          <div class="hub-section-header">
+            <h2 id="active-missions-heading" class="section-title">This Week's Missions</h2>
+            <button class="btn btn--ghost btn--sm" id="regenerate-missions">🔄 Regenerate</button>
+          </div>
+          <div class="missions-grid" id="missions-grid">
+            <!-- Populated by JS -->
+          </div>
+        </section>
+
+        <!-- Completed Missions -->
+        <section aria-labelledby="completed-missions-heading">
+          <h2 id="completed-missions-heading" class="section-title">Completed ✅</h2>
+          <div class="missions-completed" id="missions-completed">
+            <!-- Populated by JS -->
+          </div>
+        </section>
+
+      </div>
+    </div>
+  </div>
+
+
+  <!-- ══════════════════════════════════════════
+       MODULE 6: SUSTAINABILITY IMPACT SIMULATOR
+  ══════════════════════════════════════════ -->
+  <div id="simulator-view" class="module-view" role="dialog" aria-modal="true" aria-hidden="true" aria-labelledby="simulator-title">
+    <div class="module-shell">
+      <header class="module-header">
+        <div class="module-header-left">
+          <span class="module-icon" aria-hidden="true">⚗️</span>
+          <div>
+            <h1 class="module-title" id="simulator-title">Impact Simulator</h1>
+            <p class="module-subtitle">See how lifestyle changes affect your carbon footprint</p>
+          </div>
+        </div>
+        <button class="module-close" id="simulator-close" aria-label="Close Impact Simulator">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+        </button>
+      </header>
+
+      <div class="module-body">
+
+        <!-- Simulator Sliders -->
+        <section class="sim-section" aria-labelledby="sim-controls-heading">
+          <h2 id="sim-controls-heading" class="section-title">Adjust Your Lifestyle</h2>
+          <div class="sim-controls" id="sim-controls">
+            <!-- Populated by JS -->
+          </div>
+        </section>
+
+        <!-- Impact Results -->
+        <section class="sim-section" aria-labelledby="sim-results-heading">
+          <h2 id="sim-results-heading" class="section-title">Your Annual Impact</h2>
+          <div class="sim-results-grid" id="sim-results-grid">
+            <!-- Populated by JS -->
+          </div>
+        </section>
+
+        <!-- Impact Chart -->
+        <section class="sim-section sim-chart-section" aria-labelledby="sim-chart-heading">
+          <h2 id="sim-chart-heading" class="section-title">Impact Comparison</h2>
+          <div class="sim-chart-wrap">
+            <canvas id="sim-chart" role="img" aria-label="Impact comparison bar chart"></canvas>
+          </div>
+        </section>
+
+      </div>
+    </div>
+  </div>
+
+
+  <!-- ══════════════════════════════════════════
+       MODULE 7: SUSTAINABLE HABIT TRACKER
+  ══════════════════════════════════════════ -->
+  <div id="habits-view" class="module-view" role="dialog" aria-modal="true" aria-hidden="true" aria-labelledby="habits-title">
+    <div class="module-shell">
+      <header class="module-header">
+        <div class="module-header-left">
+          <span class="module-icon" aria-hidden="true">📅</span>
+          <div>
+            <h1 class="module-title" id="habits-title">Habit Tracker</h1>
+            <p class="module-subtitle">Build sustainable habits one day at a time</p>
+          </div>
+        </div>
+        <button class="module-close" id="habits-close" aria-label="Close Habit Tracker">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+        </button>
+      </header>
+
+      <div class="module-body">
+
+        <!-- Streak Overview -->
+        <section class="habit-streaks" id="habit-streaks" aria-labelledby="streaks-heading">
+          <h2 id="streaks-heading" class="sr-only">Habit Streaks</h2>
+          <!-- Populated by JS -->
+        </section>
+
+        <!-- Today's Habits -->
+        <section aria-labelledby="todays-habits-heading">
+          <div class="hub-section-header">
+            <h2 id="todays-habits-heading" class="section-title">Today's Habits</h2>
+            <span class="habit-date" id="habit-date" aria-live="polite"></span>
+          </div>
+          <div class="habits-grid" id="habits-grid">
+            <!-- Populated by JS -->
+          </div>
+        </section>
+
+        <!-- Weekly Habit Calendar -->
+        <section aria-labelledby="habit-calendar-heading">
+          <h2 id="habit-calendar-heading" class="section-title">This Week's Progress</h2>
+          <div class="habit-calendar" id="habit-calendar">
+            <!-- Populated by JS -->
+          </div>
+        </section>
+
+        <!-- Monthly Heatmap -->
+        <section aria-labelledby="habit-heatmap-heading">
+          <h2 id="habit-heatmap-heading" class="section-title">30-Day Activity</h2>
+          <div class="habit-heatmap" id="habit-heatmap">
+            <!-- Populated by JS -->
+          </div>
+        </section>
+
+      </div>
+    </div>
+  </div>
+
+
+  <!-- ══════════════════════════════════════════
+       MODULE 8: ECO CHALLENGE ARENA
+  ══════════════════════════════════════════ -->
+  <div id="challenges-view" class="module-view" role="dialog" aria-modal="true" aria-hidden="true" aria-labelledby="challenges-title">
+    <div class="module-shell">
+      <header class="module-header">
+        <div class="module-header-left">
+          <span class="module-icon" aria-hidden="true">🏆</span>
+          <div>
+            <h1 class="module-title" id="challenges-title">Eco Challenge Arena</h1>
+            <p class="module-subtitle">Take on sustainability challenges and earn badges</p>
+          </div>
+        </div>
+        <button class="module-close" id="challenges-close" aria-label="Close Eco Challenges">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+        </button>
+      </header>
+
+      <div class="module-body">
+
+        <!-- Badges Showcase -->
+        <section class="challenge-badges-section" aria-labelledby="badges-heading">
+          <h2 id="badges-heading" class="section-title">Your Badges</h2>
+          <div class="badges-showcase" id="badges-showcase">
+            <!-- Populated by JS -->
+          </div>
+          <p class="badges-progress-text" id="badges-progress-text" aria-live="polite"></p>
+        </section>
+
+        <!-- Active Challenges -->
+        <section aria-labelledby="active-challenges-heading">
+          <h2 id="active-challenges-heading" class="section-title">Active Challenges</h2>
+          <div class="challenges-grid" id="challenges-grid">
+            <!-- Populated by JS -->
+          </div>
+        </section>
+
+        <!-- Completed Challenges -->
+        <section aria-labelledby="completed-challenges-heading">
+          <h2 id="completed-challenges-heading" class="section-title">Completed Challenges 🎉</h2>
+          <div class="completed-challenges" id="completed-challenges">
+            <!-- Populated by JS -->
+          </div>
+        </section>
+
+      </div>
+    </div>
+  </div>
+
 
   <script src="script.js"></script>
 </body>
