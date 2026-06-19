@@ -6,8 +6,17 @@
 [![CSS3](https://img.shields.io/badge/CSS3-1572B6?style=flat&logo=css3&logoColor=white)](https://developer.mozilla.org/en-US/docs/Web/CSS)
 [![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?style=flat&logo=javascript&logoColor=black)](https://developer.mozilla.org/en-US/docs/Web/JavaScript)
 [![WCAG 2.1](https://img.shields.io/badge/WCAG-2.1%20AA-green?style=flat)](https://www.w3.org/WAI/WCAG21/quickref/)
+[![Live Demo](https://img.shields.io/badge/Live%20Demo-Netlify-00C7B7?style=flat&logo=netlify&logoColor=white)](https://ecopersona-ai.netlify.app)
 
-A complete, hackathon-ready web application that helps individuals **understand, track, and reduce their carbon footprint** through personalized AI-powered insights and engaging, gamified sustainability experiences.
+A complete, hackathon-ready web application that helps individuals **understand, track, and reduce their carbon footprint** through personalized sustainability insights and engaging, gamified sustainability experiences.
+
+---
+
+## 🚀 Live Demo
+
+**[https://ecopersona-ai.netlify.app](https://ecopersona-ai.netlify.app)**
+
+Experience the full application live — no sign-up or installation required.
 
 ---
 
@@ -19,7 +28,7 @@ Millions of people want to act on climate change but don't know where to start, 
 - **Education** — Daily facts, curated learning, and myth-busting
 - **Behavior Change** — Gamified challenges and weekly missions
 - **Sustainable Habit Building** — Daily habit tracking with streaks
-- **Personalized Insights** — AI-matched persona and action plans
+- **Personalized Insights** — Data-driven persona matching and tailored action plans
 
 ---
 
@@ -262,6 +271,42 @@ EcoPersona AI is designed to shift people from **passive awareness** to **active
 5. **Habits** — daily tracking builds long-term behavioral change
 
 The platform makes sustainability feel **achievable, engaging, and personal** — not overwhelming or guilt-inducing.
+
+---
+
+## 🏆 Hackathon Submission
+
+**Project:** EcoPersona AI
+
+**Challenge:** Carbon Footprint Awareness Platform
+
+**Focus Areas:**
+- Awareness
+- Sustainability Education
+- Behavior Change
+- Habit Formation
+- Personalized Insights
+
+Built as part of **Prompt Wars Virtual**.
+
+### How EcoPersona AI Meets the Judging Criteria
+
+| Criterion | Implementation |
+|---|---|
+| **Problem Statement Alignment** | Directly addresses carbon footprint awareness through 9 interconnected modules covering education, behavior change, and habit formation |
+| **Code Quality** | Modular, event-driven Vanilla JS architecture; 23 clearly separated components; consistent naming conventions; zero dependencies except Chart.js |
+| **Security** | XSS prevention via `textContent`; input sanitization with `Utils.escape()`; no external data transmission; LocalStorage isolation |
+| **Efficiency** | Zero build step; lazy module initialization; `IntersectionObserver` for animations; single Chart.js instance; FCP target < 1.5s on 3G |
+| **Testing** | End-to-end tests (`e2e.js`); manual checklist for all 9 modules; cross-browser matrix; screen reader testing |
+| **Accessibility** | Full WCAG 2.1 AA compliance; ARIA labels; skip links; keyboard navigation; `prefers-reduced-motion` support |
+
+---
+
+## 🔗 Project Links
+
+**Live Demo:** [https://ecopersona-ai.netlify.app](https://ecopersona-ai.netlify.app)
+
+**GitHub Repository:** [Insert Repository URL]
 
 ---
 
