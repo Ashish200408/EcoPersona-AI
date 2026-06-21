@@ -34,6 +34,66 @@
 /* ═══════════════════════════════════════════════════
    1. CONFIG — App Constants & Static Data
 ═══════════════════════════════════════════════════ */
+
+/**
+ * Milliseconds for the slide-exit CSS transition used across components.
+ * @type {number}
+ */
+const SLIDE_EXIT_DURATION_MS = 380;
+
+/**
+ * Milliseconds to delay focus movement after a step transition.
+ * @type {number}
+ */
+const STEP_FOCUS_DELAY_MS = 120;
+
+/**
+ * Milliseconds to delay the copy-button label reset after clipboard copy.
+ * @type {number}
+ */
+const COPY_RESET_DELAY_MS = 2000;
+
+/**
+ * Milliseconds to delay focus movement after a module opens.
+ * @type {number}
+ */
+const MODULE_FOCUS_DELAY_MS = 400;
+
+/**
+ * Number of DYK (Did You Know) cards displayed in the Learning Hub.
+ * @type {number}
+ */
+const DYK_DISPLAY_COUNT = 4;
+
+/**
+ * Number of missions generated per week.
+ * @type {number}
+ */
+const MISSIONS_PER_WEEK = 3;
+
+/**
+ * Number of days shown in the habit heatmap.
+ * @type {number}
+ */
+const HEATMAP_DAYS = 30;
+
+/**
+ * CO₂ (kg) absorbed by one tree per year, used for equivalence calculations.
+ * @type {number}
+ */
+const CO2_PER_TREE_KG = 22;
+
+/**
+ * Estimated cost per kg of CO₂ saved (£), used by the Impact Simulator.
+ * @type {number}
+ */
+const MONEY_PER_KG_CO2 = 0.15;
+
+/**
+ * Application-wide frozen configuration constants.
+ * @type {Readonly<{APP_NAME:string, STORAGE_PREFIX:string, BANNER_INTERVAL:number,
+ *   COUNTER_DURATION:number, RING_SCORE:number, RING_CIRCUMFERENCE:number}>}
+ */
 const CONFIG = Object.freeze({
   APP_NAME:            'EcoPersona AI',
   STORAGE_PREFIX:      'ecopersona_v2_',
@@ -231,6 +291,7 @@ const Store = {
    * Deep-merge a partial object into an existing stored object.
    * @param {string} key
    * @param {object} partial
+   * @returns {boolean} true if the write succeeded
    */
   update(key, partial) {
     const current = this.get(key) || {};
@@ -458,6 +519,7 @@ const Toast = {
   /** @type {HTMLElement|null} */
   _container: null,
 
+  /** Initialise the Toast system by caching the container element. */
   init() {
     this._container = document.getElementById('toast-container');
   },
@@ -504,7 +566,10 @@ const Toast = {
     this._container.appendChild(toast);
   },
 
-  /** @param {HTMLElement} toast */
+  /**
+   * Animate a toast out of view and remove it from the DOM.
+   * @param {HTMLElement} toast
+   */
   _remove(toast) {
     window.clearTimeout(toast._timerId);
     toast.classList.add('toast--removing');
@@ -522,6 +587,7 @@ const AwarenessBanner = {
   _current: 0,
   _timerId: null,
 
+  /** Cache slide/dot elements, bind controls, and start the auto-rotate timer. */
   init() {
     this._slides = document.querySelectorAll('.banner-slide');
     this._dots   = document.querySelectorAll('.banner-dot');
@@ -560,7 +626,7 @@ const AwarenessBanner = {
     this._slides[prev].classList.add('exit-left');
     this._slides[prev].classList.remove('active');
     this._slides[prev].setAttribute('aria-hidden', 'true');
-    setTimeout(() => this._slides[prev]?.classList.remove('exit-left'), 380);
+    setTimeout(() => this._slides[prev]?.classList.remove('exit-left'), SLIDE_EXIT_DURATION_MS);
 
     this._current = next;
     this._slides[next].classList.add('active');
@@ -575,11 +641,19 @@ const AwarenessBanner = {
     Utils.announce(`Awareness: ${text}`);
   },
 
+  /** Advance to the next slide. */
   next() { this.goTo(this._current + 1); },
+
+  /** Go back to the previous slide. */
   prev() { this.goTo(this._current - 1); },
 
+  /** @private Start the auto-rotate interval. */
   _startTimer() { this._timerId = setInterval(() => this.next(), CONFIG.BANNER_INTERVAL); },
+
+  /** @private Reset the auto-rotate interval. */
   _resetTimer() { clearInterval(this._timerId); this._startTimer(); },
+
+  /** Stop the auto-rotate interval (call on component teardown). */
   destroy() { clearInterval(this._timerId); }
 };
 
@@ -595,31 +669,36 @@ const StatsCards = {
     { id: 'val-challenges', target: 4,  dec: 0 }
   ],
 
+  /** Load persisted data, update stat targets, and trigger animations on scroll-into-view. */
   init() {
-    // Load real streak data
-    const today = Utils.todayKey();
-    const habitData = Store.get('habits_log') || {};
+    const habitData  = Store.get('habits_log') || {};
     const streakData = this._calculateStreak(habitData);
     this._stats[1].target = streakData.current;
 
-    const challengeProgress = Store.get('challenge_progress') || {};
-    const badgesEarned = Store.get('badges_earned') || [];
+    const badgesEarned  = Store.get('badges_earned') || [];
     const badgesCountEl = document.getElementById('badges-count');
     if (badgesCountEl) badgesCountEl.textContent = badgesEarned.length;
 
-    const missionData = Store.get('missions_state') || {};
+    const missionData       = Store.get('missions_state') || {};
     const completedMissions = Object.values(missionData).filter(m => m.completed).length;
-    const missionSubEl = document.querySelector('#lbl-missions')?.nextElementSibling;
+    const missionSubEl      = document.querySelector('#lbl-missions')?.nextElementSibling;
     if (missionSubEl) missionSubEl.textContent = `${completedMissions} completed this week`;
 
     const section = document.querySelector('.stats-section');
     AnimUtils.onVisible(section, () => this._runAll(), 0.25);
   },
 
+  /**
+   * Calculate the current daily habit streak from the habit log.
+   * @param {Object} habitData - Keyed by YYYY-MM-DD date strings.
+   * @returns {{ current: number }}
+   */
   _calculateStreak(habitData) {
     const today = new Date();
     let current = 0;
-    for (let i = 0; i < 365; i++) {
+    /** Maximum days to check when calculating streak. */
+    const MAX_STREAK_DAYS = 365;
+    for (let i = 0; i < MAX_STREAK_DAYS; i++) {
       const d = new Date(today);
       d.setDate(d.getDate() - i);
       const key = d.toISOString().slice(0, 10);
@@ -632,10 +711,16 @@ const StatsCards = {
     return { current };
   },
 
+  /**
+   * Run all counter animations in sequence with staggered start delays.
+   * @private
+   */
   _runAll() {
+    /** Stagger delay between each counter animation in milliseconds. */
+    const STAGGER_MS = 80;
     this._stats.forEach(({ id, target, dec }, i) => {
       const el = document.getElementById(id);
-      if (el) setTimeout(() => AnimUtils.counter(el, target, CONFIG.COUNTER_DURATION, dec), i * 80);
+      if (el) setTimeout(() => AnimUtils.counter(el, target, CONFIG.COUNTER_DURATION, dec), i * STAGGER_MS);
     });
   }
 };
@@ -645,32 +730,59 @@ const StatsCards = {
    9. CARBON SCORE — SVG Ring + Breakdown Bars
 ═══════════════════════════════════════════════════ */
 const CarbonScore = {
+  /**
+   * Seed the ring score from persisted assessment data and register
+   * an IntersectionObserver to trigger animations on first visibility.
+   */
   init() {
-    // Load assessment result to update score
     const result = Store.get('dna_assessment');
     if (result) {
-      const score = Math.round(100 - ((result.score - 6) / 12) * 100);
-      document.getElementById('ring-score') && (document.getElementById('ring-score').textContent = score);
-      document.getElementById('val-score') && (document.getElementById('val-score').dataset.target = score);
+      /** Score range: raw 6–18 mapped to display 0–100. */
+      const score = CarbonScore._rawToDisplayScore(result.score);
+      const ringScoreEl = document.getElementById('ring-score');
+      const valScoreEl  = document.getElementById('val-score');
+      if (ringScoreEl) ringScoreEl.textContent   = score;
+      if (valScoreEl)  valScoreEl.dataset.target = score;
     }
 
     const card = document.querySelector('.card--score');
     AnimUtils.onVisible(card, () => this._animate(), 0.35);
   },
 
+  /**
+   * Convert a raw assessment score (6–18) to a 0–100 display score.
+   * Lower raw scores (greener behaviour) map to higher display scores.
+   * @param {number} rawScore
+   * @returns {number}
+   */
+  _rawToDisplayScore(rawScore) {
+    /** Raw score bounds defined by the Assessment scoring model. */
+    const RAW_MIN = 6;
+    const RAW_RANGE = 12;
+    return Math.round(100 - ((rawScore - RAW_MIN) / RAW_RANGE) * 100);
+  },
+
+  /** @private Animate the SVG ring, score counter, and breakdown bars. */
   _animate() {
+    /** Delay (ms) before starting the ring stroke animation. */
+    const RING_DELAY_MS    = 300;
+    /** Duration (ms) for the score counter animation. */
+    const COUNTER_DURATION = 1300;
+    /** Delay (ms) before animating breakdown bars. */
+    const BAR_DELAY_MS     = 500;
+
     const assessResult = Store.get('dna_assessment');
     const score = assessResult
-      ? Math.round(100 - ((assessResult.score - 6) / 12) * 100)
+      ? CarbonScore._rawToDisplayScore(assessResult.score)
       : CONFIG.RING_SCORE;
 
     const ringEl = document.getElementById('ring-fill');
-    AnimUtils.ring(ringEl, score, 300);
+    AnimUtils.ring(ringEl, score, RING_DELAY_MS);
 
     const scoreEl = document.getElementById('ring-score');
-    if (scoreEl) AnimUtils.counter(scoreEl, score, 1300, 0);
+    if (scoreEl) AnimUtils.counter(scoreEl, score, COUNTER_DURATION, 0);
 
-    AnimUtils.breakdownBars(500);
+    AnimUtils.breakdownBars(BAR_DELAY_MS);
   }
 };
 
@@ -683,11 +795,13 @@ const WeeklyChart = {
   _chart: null,
   _period: 'week',
 
+  /** Build the Chart.js line chart and bind period-selector tabs. */
   init() {
     const canvas = document.getElementById('weekly-chart');
     if (!canvas) return;
 
     if (typeof Chart === 'undefined') {
+      // Chart.js not yet loaded — wait for window load event.
       window.addEventListener('load', () => this._build(canvas), { once: true });
     } else {
       this._build(canvas);
@@ -800,6 +914,11 @@ const WeeklyChart = {
     this._chart.update('active');
   },
 
+  /**
+   * Populate the accessible data table beneath the chart.
+   * @param {string} period - One of 'week' | 'month' | 'year'
+   * @private
+   */
   _buildTable(period) {
     const tbody = document.getElementById('chart-table');
     if (!tbody) return;
@@ -809,6 +928,7 @@ const WeeklyChart = {
       .join('');
   },
 
+  /** Destroy the Chart.js instance to free memory (call on module teardown). */
   destroy() { this._chart?.destroy(); this._chart = null; }
 };
 
@@ -819,6 +939,7 @@ const WeeklyChart = {
 const DailyFact = {
   _idx: 0,
 
+  /** Set the initial fact index and bind navigation/copy controls. */
   init() {
     this._idx = Utils.getDayIndex();
     this._render();
@@ -835,28 +956,32 @@ const DailyFact = {
     const body = document.getElementById('fact-body');
     if (!body) return;
 
-    body.style.opacity = '0';
+    /** Duration (ms) for the fade-out before swapping fact content. */
+    const FACT_FADE_DELAY_MS = 190;
+
+    body.style.opacity   = '0';
     body.style.transform = 'translateY(8px)';
     body.style.transition = 'opacity 0.18s ease, transform 0.18s ease';
 
     setTimeout(() => {
-      const emoji  = document.getElementById('fact-emoji');
-      const cat    = document.getElementById('fact-cat');
-      const quote  = document.getElementById('fact-quote');
-      const source = document.getElementById('fact-source');
+      const emojiEl  = document.getElementById('fact-emoji');
+      const catEl    = document.getElementById('fact-cat');
+      const quoteEl  = document.getElementById('fact-quote');
+      const sourceEl = document.getElementById('fact-source');
 
-      if (emoji)  emoji.textContent  = fact.emoji;
-      if (cat)    cat.textContent    = fact.category.charAt(0).toUpperCase() + fact.category.slice(1);
-      if (quote)  quote.textContent  = fact.text;
-      if (source) source.textContent = fact.source;
+      if (emojiEl)  emojiEl.textContent  = fact.emoji;
+      if (catEl)    catEl.textContent    = fact.category.charAt(0).toUpperCase() + fact.category.slice(1);
+      if (quoteEl)  quoteEl.textContent  = fact.text;
+      if (sourceEl) sourceEl.textContent = fact.source;
 
       body.style.opacity   = '1';
       body.style.transform = 'translateY(0)';
-    }, 190);
+    }, FACT_FADE_DELAY_MS);
 
     Utils.announce(`New fact: ${fact.text}`);
   },
 
+  /** Advance to the next fact (wraps around). @private */
   _next() {
     this._idx = (this._idx + 1) % ECO_FACTS.length;
     this._render();
@@ -877,7 +1002,7 @@ const DailyFact = {
             setTimeout(() => {
               btn.classList.remove('copied');
               btn.innerHTML = `<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg> Copy`;
-            }, 2000);
+            }, COPY_RESET_DELAY_MS);
           }
         })
         .catch(() => Toast.show('Copy failed', 'Please copy the text manually.', 'warning'));
@@ -904,6 +1029,7 @@ const Navigation = {
     challenges: 'challenges-view'
   },
 
+  /** Set up greeting, sidebar, mobile drawer, module link routing, and user profile display. */
   init() {
     this._setGreeting();
     this._bindSidebarToggle();
@@ -1038,10 +1164,10 @@ const Navigation = {
 
     setTimeout(() => {
       view.querySelector('h1,h2,.module-title')?.focus?.();
-    }, 400);
+    }, MODULE_FOCUS_DELAY_MS);
 
     Utils.announce(`${mod} module opened.`);
-    EventBus.emit(`module:opened`, { module: mod });
+    EventBus.emit('module:opened', { module: mod });
   },
 
   /**
@@ -1065,6 +1191,7 @@ const Navigation = {
    13. KEYBOARD NAV — Arrow Key Navigation
 ═══════════════════════════════════════════════════ */
 const KeyboardNav = {
+  /** Bind arrow-key navigation for the sidebar and bottom tab bar. */
   init() {
     this._sidebarArrows();
     this._bottomTabArrows();
@@ -1102,6 +1229,7 @@ const KeyboardNav = {
    14. MODULE CLOSER — Bind close buttons
 ═══════════════════════════════════════════════════ */
 const ModuleCloser = {
+  /** Bind close buttons and the global Escape key handler for all module views. */
   init() {
     const closeBindings = [
       ['blindspot-close',   'blindspot-view'],
@@ -1302,6 +1430,13 @@ const Assessment = {
   },
 
   // ── NAVIGATION ──
+
+  /**
+   * Transition the assessment to a given step index.
+   * Handles exit animation on the previous step and focus management on the next.
+   * @param {number} nextIdx - Target step index (0-based, clamped to valid range).
+   * @private
+   */
   _goTo(nextIdx) {
     const steps   = this.STEPS;
     const prevIdx = this._step;
@@ -1315,7 +1450,7 @@ const Assessment = {
       prevEl.classList.add('is-exiting');
       prevEl.classList.remove('is-active');
       prevEl.setAttribute('aria-hidden', 'true');
-      setTimeout(() => prevEl?.classList.remove('is-exiting'), 380);
+      setTimeout(() => prevEl?.classList.remove('is-exiting'), SLIDE_EXIT_DURATION_MS);
     }
 
     this._step = nextIdx;
@@ -1329,39 +1464,62 @@ const Assessment = {
     setTimeout(() => {
       const heading = nextEl?.querySelector('h1,h2,.assess-intro-title');
       if (heading) { heading.setAttribute('tabindex', '-1'); heading.focus(); }
-    }, 120);
+    }, STEP_FOCUS_DELAY_MS);
   },
 
+  /**
+   * Advance to the next step, validating the current field first.
+   * On the last question step (6), computes and displays results.
+   * @private
+   */
   _next() {
+    /** Index of the last question step before results. */
+    const LAST_QUESTION_STEP = 6;
+    /** Index of the results step. */
+    const RESULTS_STEP = 7;
+
     const field = this.STEPS[this._step]?.field;
     if (field && !this._validateField(field)) return;
 
-    if (this._step === 6) {
+    if (this._step === LAST_QUESTION_STEP) {
       this._computeResults();
-      this._goTo(7);
-    } else if (this._step < 7) {
+      this._goTo(RESULTS_STEP);
+    } else if (this._step < RESULTS_STEP) {
       this._goTo(this._step + 1);
     }
   },
 
+  /**
+   * Go back to the previous step, clearing any validation error.
+   * @private
+   */
   _back() {
     if (this._step <= 0) return;
     this._clearError(this.STEPS[this._step]?.field);
     this._goTo(this._step - 1);
   },
 
+  /**
+   * Skip the current question (records null answer) and advance.
+   * @private
+   */
   _skip() {
+    /** Index of the last question step before results. */
+    const LAST_QUESTION_STEP = 6;
+    /** Index of the results step. */
+    const RESULTS_STEP = 7;
+
     const field = this.STEPS[this._step]?.field;
     if (field) {
       this._answers[field] = null;
       this._clearError(field);
       this._savePartial();
     }
-    if (this._step < 6) {
+    if (this._step < LAST_QUESTION_STEP) {
       this._goTo(this._step + 1);
-    } else if (this._step === 6) {
+    } else if (this._step === LAST_QUESTION_STEP) {
       this._computeResults();
-      this._goTo(7);
+      this._goTo(RESULTS_STEP);
     }
   },
 
@@ -1399,16 +1557,30 @@ const Assessment = {
   },
 
   // ── ERROR DISPLAY ──
+
+  /**
+   * Show a validation error for a specific assessment field.
+   * Adds a shake animation that auto-removes after a short delay.
+   * @param {string} field
+   * @private
+   */
   _showError(field) {
+    /** Duration (ms) for the shake animation on a fieldset with an error. */
+    const ERROR_SHAKE_DURATION_MS = 560;
     const errEl    = document.getElementById(`error-${field}`);
     const fieldset = document.getElementById(`fieldset-${field}`);
     if (errEl) errEl.hidden = false;
     if (fieldset) {
       fieldset.classList.add('has-error');
-      setTimeout(() => fieldset?.classList.remove('has-error'), 560);
+      setTimeout(() => fieldset?.classList.remove('has-error'), ERROR_SHAKE_DURATION_MS);
     }
   },
 
+  /**
+   * Clear the validation error for a specific assessment field.
+   * @param {string} field
+   * @private
+   */
   _clearError(field) {
     if (!field) return;
     const errEl = document.getElementById(`error-${field}`);
@@ -1417,13 +1589,21 @@ const Assessment = {
   },
 
   // ── SCORE CALCULATION ──
+
+  /**
+   * Calculate the total assessment score and per-category breakdown.
+   * Unanswered (null) fields default to a mid-range score of 2.
+   * @returns {{ total: number, breakdown: Object<string, {answer:string|null, score:number}> }}
+   */
   _calculateScore() {
+    /** Default score applied when a question is skipped or unanswered. */
+    const DEFAULT_SCORE = 2;
     let total = 0;
     const breakdown = {};
 
     for (const [field, scoreMap] of Object.entries(this.SCORES)) {
       const answer = this._answers[field];
-      const score  = answer != null ? (scoreMap[answer] ?? 2) : 2;
+      const score  = answer != null ? (scoreMap[answer] ?? DEFAULT_SCORE) : DEFAULT_SCORE;
       total += score;
       breakdown[field] = { answer, score };
     }
@@ -1431,6 +1611,12 @@ const Assessment = {
     return { total, breakdown };
   },
 
+  /**
+   * Find the persona matching a given total score.
+   * Falls back to the last (highest-footprint) persona if no range matches.
+   * @param {number} score
+   * @returns {Object} Persona configuration object
+   */
   _getPersona(score) {
     return this.PERSONAS.find(p => score >= p.min && score <= p.max)
            ?? this.PERSONAS[this.PERSONAS.length - 1];
@@ -1452,8 +1638,10 @@ const Assessment = {
       card.dataset.personaId = persona.id;
     }
 
-    // Score bar (6–18 → 0–100%)
-    const scorePct = ((total - 6) / 12) * 100;
+    // Score bar: map raw score 6–18 to a 0–100% width.
+    const RAW_MIN   = 6;
+    const RAW_RANGE = 12;
+    const scorePct  = ((total - RAW_MIN) / RAW_RANGE) * 100;
     this._setText('results-score-num', `${total} / 18`);
 
     const barEl = document.getElementById('results-score-bar-el');
@@ -1462,14 +1650,21 @@ const Assessment = {
       barEl.setAttribute('aria-valuetext', `${total} out of 18 — ${persona.name}`);
     }
 
+    /** Thresholds (%) that determine the colour of the score bar. */
+    const SCORE_GOOD_THRESHOLD = 33;
+    const SCORE_MID_THRESHOLD  = 66;
+
+    /** Delay (ms) before animating the score bar width (lets it enter the DOM first). */
+    const SCORE_BAR_DELAY_MS = 350;
+
     const fill = document.getElementById('results-score-fill');
     if (fill) {
-      fill.style.background = scorePct <= 33
+      fill.style.background = scorePct <= SCORE_GOOD_THRESHOLD
         ? 'hsl(142,71%,49%)'
-        : scorePct <= 66
+        : scorePct <= SCORE_MID_THRESHOLD
         ? 'hsl(38,92%,52%)'
         : 'hsl(4,86%,58%)';
-      setTimeout(() => { fill.style.width = `${scorePct}%`; }, 350);
+      setTimeout(() => { fill.style.width = `${scorePct}%`; }, SCORE_BAR_DELAY_MS);
     }
 
     this._renderStrengths(persona, breakdown);
@@ -1552,14 +1747,23 @@ const Assessment = {
   },
 
   // ── UI STATE ──
+
+  /**
+   * Synchronise all assessment UI elements with the current step state:
+   * progress bar, step label, step dots, footer buttons, and radio selections.
+   * @private
+   */
   _updateUI() {
-    const step   = this._step;
+    const step    = this._step;
+    /** Total number of question steps (not counting intro or results). */
     const TOTAL_Q = 6;
+    /** Index of the results step. */
+    const RESULTS_STEP = 7;
 
     const stepLabelEl = document.getElementById('assess-step-label');
     if (stepLabelEl) stepLabelEl.textContent = this.STEPS[step]?.label || '';
 
-    const pct    = step === 0 ? 0 : step === 7 ? 100 : ((step - 1) / TOTAL_Q) * 100;
+    const pct = step === 0 ? 0 : step === RESULTS_STEP ? 100 : ((step - 1) / TOTAL_Q) * 100;
     const fillEl = document.getElementById('assess-progress-fill');
     const barEl  = document.getElementById('assess-progress-bar');
     if (fillEl) fillEl.style.width  = `${pct}%`;
@@ -1577,7 +1781,10 @@ const Assessment = {
     const nextBtn = document.getElementById('assess-next');
     const skipBtn = document.getElementById('assess-skip');
 
-    if (step === 7) {
+    /** Index of the last question step. */
+    const LAST_QUESTION_STEP = 6;
+
+    if (step === RESULTS_STEP) {
       if (footer) footer.hidden = true;
     } else {
       if (footer) footer.hidden = false;
@@ -1586,13 +1793,13 @@ const Assessment = {
         const arrowSvg = `<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>`;
         nextBtn.innerHTML = step === 0
           ? `Start Assessment ${arrowSvg}`
-          : step === 6
+          : step === LAST_QUESTION_STEP
           ? `See My Results ${arrowSvg}`
           : `Continue ${arrowSvg}`;
         nextBtn.setAttribute('aria-label',
-          step === 0 ? 'Start the assessment' :
-          step === 6 ? 'See your results' :
-          'Continue to next question');
+          step === 0                    ? 'Start the assessment' :
+          step === LAST_QUESTION_STEP   ? 'See your results' :
+                                          'Continue to next question');
       }
 
       if (skipBtn) skipBtn.hidden = (step === 0);
@@ -1775,6 +1982,14 @@ const Assessment = {
   },
 
   // ── Helpers ──
+
+  /**
+   * Set the textContent of a DOM element by ID.
+   * No-ops silently if the element is not found.
+   * @param {string} id  - Element ID
+   * @param {string} text - Text to set
+   * @private
+   */
   _setText(id, text) {
     const el = document.getElementById(id);
     if (el) el.textContent = text;
@@ -1788,6 +2003,10 @@ const Assessment = {
 const BlindSpot = {
   _tipIdx: 0,
 
+  /**
+   * Render all BlindSpot content and bind the tip rotation button.
+   * Safe to call multiple times — inner renders guard against re-rendering.
+   */
   render() {
     this._renderComparisons();
     this._renderContributors();
@@ -1835,7 +2054,13 @@ const BlindSpot = {
     `).join('');
   },
 
+  /**
+   * Render the current rotating insight tip with a fade animation.
+   * @private
+   */
   _renderTip() {
+    /** Delay (ms) for the fade-out before swapping tip text. */
+    const TIP_FADE_DELAY_MS = 150;
     const el = document.getElementById('bs-tip-content');
     if (el) {
       el.style.opacity = '0';
@@ -1843,7 +2068,7 @@ const BlindSpot = {
         el.textContent = BLIND_SPOTS.tips[this._tipIdx];
         el.style.opacity = '1';
         el.style.transition = 'opacity 0.3s ease';
-      }, 150);
+      }, TIP_FADE_DELAY_MS);
     }
   }
 };
@@ -1856,6 +2081,10 @@ const LearningHub = {
   _activeFilter: 'all',
   _viewedFacts:  new Set(),
 
+  /**
+   * Render all Learning Hub content and restore viewed-fact state from storage.
+   * Safe to call on every module open.
+   */
   render() {
     this._viewedFacts = new Set(Store.get('viewed_facts') || []);
     this._renderFeatured();
@@ -1880,11 +2109,12 @@ const LearningHub = {
     `;
   },
 
+  /** @private Render a random selection of Did-You-Know fact cards. */
   _renderDYK() {
     const grid = document.getElementById('dyk-grid');
     if (!grid || grid.children.length > 0) return;
 
-    const picks = Utils.shuffle(DYK_FACTS).slice(0, 4);
+    const picks = Utils.shuffle(DYK_FACTS).slice(0, DYK_DISPLAY_COUNT);
     grid.innerHTML = picks.map(f => `
       <div class="dyk-card">
         <div class="dyk-card-emoji" aria-hidden="true">${Utils.escape(f.emoji)}</div>
@@ -2037,7 +2267,7 @@ const EcoStory = {
     // Generate personalized story paragraphs
     const story = this._buildStory(persona, strongCat, weakCat, result.score);
     const co2Saved  = Math.round((18 - result.score) * 180);
-    const treeEquiv = Math.round(co2Saved / 22);
+    const treeEquiv = Math.round(co2Saved / CO2_PER_TREE_KG);
 
     container.innerHTML = `
       <div class="story-header">
@@ -2096,17 +2326,24 @@ const EcoStory = {
     });
   },
 
+  /**
+   * Build the array of story paragraph strings for the EcoPersona narrative.
+   * @param {Object} persona   - Persona configuration object from Assessment.PERSONAS
+   * @param {Object} strongCat - Category object ({ icon, label }) with the lowest raw score
+   * @param {Object} weakCat   - Category object ({ icon, label }) with the highest raw score
+   * @param {number} score     - Raw assessment score (6–18)
+   * @returns {string[]} Array of paragraph HTML strings
+   */
   _buildStory(persona, strongCat, weakCat, score) {
     const month = new Date().toLocaleDateString('en-GB', { month: 'long' });
-    const paragraphs = [
+    return [
       `You are a <strong class="story-highlight">${persona.name}</strong>. ${persona.headline}`,
       `This ${month}, your lifestyle assessment reveals a thoughtful picture of your environmental footprint. Your ${strongCat.icon} <strong>${strongCat.label}</strong> habits stand out as a genuine strength — an area where your daily choices are making a real, measurable difference to our planet.`,
       `At the same time, your biggest opportunity for growth lies in ${weakCat.icon} <strong>${weakCat.label}</strong>. This isn't a criticism — it's a spotlight on where your next chapter of impact can unfold. Every eco champion started exactly where you are now.`,
-      `${persona.desc}`,
+      persona.desc,
       `By committing to the personalized recommendations below — and completing your weekly missions — you have the power to transform your environmental story significantly over the next 12 months. The planet doesn't need a few perfect eco-warriors. It needs millions of people making meaningful improvements. <strong class="story-highlight">You are one of those people.</strong>`,
       `Your journey continues. Every meal choice, every commute decision, every purchase made consciously writes the next paragraph of your Eco Story. What will yours say?`
     ];
-    return paragraphs;
   }
 };
 
@@ -2118,6 +2355,10 @@ const Missions = {
   _missions: [],
   _rendered: false,
 
+  /**
+   * Load or generate this week's missions, render all UI sections,
+   * and bind the "Regenerate" button (idempotent — safe to call each time the module opens).
+   */
   render() {
     this._loadOrGenerate();
     this._renderStats();
@@ -2151,30 +2392,40 @@ const Missions = {
     return d.toISOString().slice(0, 10);
   },
 
+  /**
+   * Generate a personalised set of missions for the current week.
+   * If assessment data is available, missions targeting the weakest categories
+   * are prioritised (top 2 weak areas surfaced first).
+   * @private
+   */
   _generateMissions() {
-    // Get assessment to personalize missions
     const result = Store.get('dna_assessment');
     let pool = Utils.shuffle(MISSION_TEMPLATES);
 
-    // If we have assessment data, prioritize missions relevant to weak areas
     if (result?.breakdown) {
-      const breakdown = result.breakdown;
-      const weak = Object.entries(breakdown)
+      /** Map from assessment field names to mission category labels. */
+      const FIELD_TO_CATEGORY = {
+        transport: 'Transport', food: 'Food', electricity: 'Energy',
+        shopping:  'Shopping',  waste: 'Waste', water: 'Water'
+      };
+      /** Number of weak categories to prioritise when selecting missions. */
+      const WEAK_CATEGORY_COUNT = 2;
+
+      const weakFields = Object.entries(result.breakdown)
         .sort((a, b) => b[1].score - a[1].score)
         .map(([field]) => field);
 
-      const catMap = {
-        transport: 'Transport', food: 'Food', electricity: 'Energy',
-        shopping: 'Shopping', waste: 'Waste', water: 'Water'
-      };
+      const weakCategories = weakFields
+        .slice(0, WEAK_CATEGORY_COUNT)
+        .map(w => FIELD_TO_CATEGORY[w])
+        .filter(Boolean);
 
-      const weakCategories = weak.slice(0, 2).map(w => catMap[w]).filter(Boolean);
-      const prioritized = pool.filter(m => weakCategories.includes(m.category));
-      const rest = pool.filter(m => !weakCategories.includes(m.category));
+      const prioritized = pool.filter(m =>  weakCategories.includes(m.category));
+      const rest        = pool.filter(m => !weakCategories.includes(m.category));
       pool = [...prioritized, ...rest];
     }
 
-    this._missions = pool.slice(0, 3).map(t => ({ ...t, completed: false }));
+    this._missions = pool.slice(0, MISSIONS_PER_WEEK).map(t => ({ ...t, completed: false }));
     Store.set('weekly_missions', { weekOf: this._getWeekKey(), missions: this._missions });
   },
 
@@ -2342,24 +2593,42 @@ const Simulator = {
     });
   },
 
+  /**
+   * Calculate annual CO₂ impact, savings, and equivalents from slider values.
+   * Daily-rate sliders (AC, shower) are multiplied by 365; weekly sliders by 52.
+   * @returns {{ annualCO2:number, saving:number, trees:number, money:number, score:number, baseline:number }}
+   */
   _calcImpact() {
+    /** IDs of sliders measured per day (all others are measured per week). */
+    const DAILY_SLIDER_IDS = ['ac', 'shower'];
+    /** Weeks per year for weekly-rate sliders. */
+    const WEEKS_PER_YEAR = 52;
+    /** Days per year for daily-rate sliders. */
+    const DAYS_PER_YEAR  = 365;
+    /** Score multiplier: maps fraction-of-baseline saved to an impact score. */
+    const SCORE_MULTIPLIER = 30;
+
+    /**
+     * Return the correct annual multiplier for a given slider.
+     * @param {string} id
+     * @returns {number}
+     */
+    const getMultiplier = (id) => DAILY_SLIDER_IDS.includes(id) ? DAYS_PER_YEAR : WEEKS_PER_YEAR;
+
     let annualCO2 = 0;
     SIMULATOR_CONFIG.forEach(cfg => {
       const val = this._values[cfg.id] || 0;
-      // Weekly to annual conversion
-      const multiplier = cfg.id === 'ac' || cfg.id === 'shower' ? 365 : 52;
-      annualCO2 += val * cfg.co2PerUnit * multiplier;
+      annualCO2 += val * cfg.co2PerUnit * getMultiplier(cfg.id);
     });
 
     const baseline = SIMULATOR_CONFIG.reduce((sum, cfg) => {
-      const mult = cfg.id === 'ac' || cfg.id === 'shower' ? 365 : 52;
-      return sum + cfg.default * cfg.co2PerUnit * mult;
+      return sum + cfg.default * cfg.co2PerUnit * getMultiplier(cfg.id);
     }, 0);
 
-    const saving   = Math.max(0, baseline - annualCO2);
-    const trees    = Math.round(saving / 22);
-    const money    = Math.round(saving * 0.15);
-    const score    = Math.round((saving / baseline) * 30);
+    const saving = Math.max(0, baseline - annualCO2);
+    const trees  = Math.round(saving / CO2_PER_TREE_KG);
+    const money  = Math.round(saving * MONEY_PER_KG_CO2);
+    const score  = Math.round((saving / baseline) * SCORE_MULTIPLIER);
 
     return { annualCO2: Math.round(annualCO2), saving: Math.round(saving), trees, money, score, baseline: Math.round(baseline) };
   },
@@ -2445,16 +2714,25 @@ const Simulator = {
     });
   },
 
+  /**
+   * Build the Chart.js bar-chart dataset from current slider values and defaults.
+   * @returns {Object} Chart.js data object with labels and two datasets.
+   * @private
+   */
   _getChartData() {
-    const labels = SIMULATOR_CONFIG.map(c => c.label.split('/')[0].trim());
-    const current  = SIMULATOR_CONFIG.map(cfg => {
-      const mult = cfg.id === 'ac' || cfg.id === 'shower' ? 365 : 52;
-      return Math.round(this._values[cfg.id] * cfg.co2PerUnit * mult);
-    });
-    const defaults = SIMULATOR_CONFIG.map(cfg => {
-      const mult = cfg.id === 'ac' || cfg.id === 'shower' ? 365 : 52;
-      return Math.round(cfg.default * cfg.co2PerUnit * mult);
-    });
+    /** IDs of sliders measured per day (all others are measured per week). */
+    const DAILY_SLIDER_IDS = ['ac', 'shower'];
+    const WEEKS_PER_YEAR   = 52;
+    const DAYS_PER_YEAR    = 365;
+    const getMultiplier    = (id) => DAILY_SLIDER_IDS.includes(id) ? DAYS_PER_YEAR : WEEKS_PER_YEAR;
+
+    const labels   = SIMULATOR_CONFIG.map(c => c.label.split('/')[0].trim());
+    const current  = SIMULATOR_CONFIG.map(cfg =>
+      Math.round(this._values[cfg.id] * cfg.co2PerUnit * getMultiplier(cfg.id))
+    );
+    const defaults = SIMULATOR_CONFIG.map(cfg =>
+      Math.round(cfg.default * cfg.co2PerUnit * getMultiplier(cfg.id))
+    );
 
     return {
       labels,
@@ -2481,6 +2759,10 @@ const Simulator = {
 const HabitTracker = {
   _log: {},    // { 'YYYY-MM-DD': { h1: true, h2: false, ... } }
 
+  /**
+   * Load today's habit log from storage and render all Habit Tracker UI sections.
+   * Safe to call on every module open.
+   */
   render() {
     this._log = Store.get('habits_log') || {};
     this._renderStreaks();
@@ -2521,14 +2803,26 @@ const HabitTracker = {
     `;
   },
 
+  /**
+   * Calculate daily streak, weekly streak, and total active days this month.
+   * @returns {{ daily: number, weekly: number, monthly: number }}
+   * @private
+   */
   _calcStreaks() {
+    /** Days to look back when calculating the daily streak. */
+    const MAX_DAILY_LOOKBACK = 365;
+    /** Weeks to look back when calculating the weekly streak. */
+    const MAX_WEEKLY_LOOKBACK = 52;
+    /** Days in a calendar week. */
+    const DAYS_PER_WEEK = 7;
+
     const today = new Date();
-    let daily = 0;
-    let weekly = 0;
+    let daily   = 0;
+    let weekly  = 0;
     let monthly = 0;
 
-    // Daily streak
-    for (let i = 0; i < 365; i++) {
+    // Daily streak: count consecutive days with any habit logged.
+    for (let i = 0; i < MAX_DAILY_LOOKBACK; i++) {
       const d = new Date(today);
       d.setDate(d.getDate() - i);
       const key = d.toISOString().slice(0, 10);
@@ -2539,22 +2833,22 @@ const HabitTracker = {
       }
     }
 
-    // Weekly streak (consecutive weeks with activity)
-    for (let w = 0; w < 52; w++) {
+    // Weekly streak: count consecutive weeks with at least one logged day.
+    for (let w = 0; w < MAX_WEEKLY_LOOKBACK; w++) {
       let hasActivity = false;
-      for (let d = 0; d < 7; d++) {
+      for (let d = 0; d < DAYS_PER_WEEK; d++) {
         const day = new Date(today);
-        day.setDate(day.getDate() - (w * 7 + d));
+        day.setDate(day.getDate() - (w * DAYS_PER_WEEK + d));
         const key = day.toISOString().slice(0, 10);
         if (this._log[key] && Object.values(this._log[key]).some(Boolean)) {
           hasActivity = true; break;
         }
       }
       if (hasActivity) weekly++;
-      else if (w > 0) break;
+      else if (w > 0)  break;
     }
 
-    // Monthly days with activity
+    // Monthly: count distinct active days since the start of the current month.
     const monthStart = new Date(today.getFullYear(), today.getMonth(), 1);
     for (let d = new Date(monthStart); d <= today; d.setDate(d.getDate() + 1)) {
       const key = d.toISOString().slice(0, 10);
@@ -2653,6 +2947,11 @@ const HabitTracker = {
     }).join('');
   },
 
+  /**
+   * Render the 30-day habit activity heatmap.
+   * Each cell is colour-coded by completion level (0–4).
+   * @private
+   */
   _renderHeatmap() {
     const container = document.getElementById('habit-heatmap');
     if (!container) return;
@@ -2660,13 +2959,14 @@ const HabitTracker = {
     const today = new Date();
     const cells = [];
 
-    for (let i = 29; i >= 0; i--) {
+    for (let i = HEATMAP_DAYS - 1; i >= 0; i--) {
       const d = new Date(today);
       d.setDate(today.getDate() - i);
       const key    = d.toISOString().slice(0, 10);
       const dayLog = this._log[key] || {};
       const done   = Object.values(dayLog).filter(Boolean).length;
       const total  = HABIT_DEFINITIONS.length;
+      /** Completion level 0–4: maps fraction of habits done to a discrete heat level. */
       const level  = !total ? 0 : Math.ceil((done / total) * 4);
 
       cells.push(`
@@ -2690,9 +2990,13 @@ const Challenges = {
   _progress: {},   // { challengeId: { steps: n, completed: bool, startedAt: str } }
   _badges:   [],
 
+  /**
+   * Load persisted progress and badge data, then render all Challenge Arena sections.
+   * Safe to call on every module open.
+   */
   render() {
     this._progress = Store.get('challenge_progress') || {};
-    this._badges   = Store.get('badges_earned')     || [];
+    this._badges   = Store.get('badges_earned')      || [];
     this._renderBadges();
     this._renderChallenges();
     this._renderCompleted();
@@ -2820,12 +3124,12 @@ const Challenges = {
     this._progress[challengeId].completed = true;
     Store.set('challenge_progress', this._progress);
 
-    // Award badge
-    const badgeMap = {
+    /** Map from challenge ID to the badge ID awarded on completion. */
+    const CHALLENGE_BADGE_MAP = {
       c1: 'plastic', c2: 'commuter', c3: 'energy',
       c4: 'water',   c5: 'foodie',   c6: 'waster'
     };
-    const badgeId = badgeMap[challengeId];
+    const badgeId = CHALLENGE_BADGE_MAP[challengeId];
     if (badgeId && !this._badges.includes(badgeId)) {
       this._badges.push(badgeId);
       Store.set('badges_earned', this._badges);
@@ -2877,20 +3181,28 @@ const Challenges = {
    23. DASHBOARD — Orchestrator
 ═══════════════════════════════════════════════════ */
 const Dashboard = {
+  /**
+   * Boot the application in dependency order and register cross-module event listeners.
+   * Called once on DOMContentLoaded (or immediately if the document is already ready).
+   */
   init() {
-    // Boot all sub-modules in dependency order
+    // Core UI modules first
     Toast.init();
     Navigation.init();
     ModuleCloser.init();
+
+    // Dashboard widgets
     AwarenessBanner.init();
     StatsCards.init();
     CarbonScore.init();
     DailyFact.init();
     WeeklyChart.init();
+
+    // Accessibility + assessment
     KeyboardNav.init();
     Assessment.init();
 
-    // Listen for assessment completion to update dashboard
+    // Update persona badge and score tag when assessment completes.
     EventBus.on('assessment:completed', ({ persona }) => {
       if (persona) {
         const ecoBadge = document.getElementById('eco-persona-badge');
@@ -2900,12 +3212,14 @@ const Dashboard = {
       }
     });
 
-    // Listen for habit/challenge completion to update stats
+    // Refresh streak counter when a habit is logged.
     EventBus.on('habit:completed', () => { StatsCards.init(); });
+
+    // Refresh badge counter when a challenge is completed.
     EventBus.on('challenge:completed', () => {
       const badgesCount = Store.get('badges_earned')?.length || 0;
-      const el = document.getElementById('badges-count');
-      if (el) el.textContent = badgesCount;
+      const badgesEl    = document.getElementById('badges-count');
+      if (badgesEl) badgesEl.textContent = badgesCount;
     });
 
     EventBus.emit('dashboard:ready', { ts: Date.now() });
