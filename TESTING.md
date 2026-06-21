@@ -3,10 +3,26 @@
 ## Test Strategy
 
 EcoPersona AI uses a combination of:
-1. **Manual functional testing** — All 9 modules manually verified
-2. **Accessibility testing** — ARIA, keyboard, screen reader
-3. **Cross-browser testing** — Chrome, Firefox, Edge, Safari
-4. **Responsive testing** — Mobile (320px), tablet (768px), desktop (1440px)
+1. **Automated unit tests** — `test.js` covers all core modules with 50+ assertions (Utils, Store, EventBus, Assessment, CONFIG, ECO_FACTS, MISSION_TEMPLATES, CHALLENGE_DATA)
+2. **End-to-end (E2E) tests** — `e2e.js` (Puppeteer) runs a full browser flow through all 6 assessment steps with pass/fail assertions
+3. **Manual functional testing** — All 9 modules manually verified
+4. **Accessibility testing** — ARIA, keyboard, screen reader
+5. **Cross-browser testing** — Chrome, Firefox, Edge, Safari
+6. **Responsive testing** — Mobile (320px), tablet (768px), desktop (1440px)
+
+### Running Unit Tests
+1. Open `index.html` in a browser
+2. Open Developer Tools (F12 → Console)
+3. Copy and paste the contents of `test.js` into the Console
+4. Press Enter — results appear with ✅ / ❌ markers
+
+### Running E2E Tests
+```bash
+npm test
+# or
+node e2e.js
+```
+Requires the app to be running at `http://localhost:3300`.
 
 ---
 

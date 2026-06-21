@@ -1,17 +1,28 @@
 {
   "name": "ecopersona-ai",
   "version": "1.0.0",
-  "description": "",
+  "description": "EcoPersona AI — An interactive sustainability assessment and habit tracking web application",
   "main": "script.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "node e2e.js",
+    "test:e2e": "node e2e.js",
+    "test:unit": "echo 'Open index.html in browser and paste test.js into DevTools console to run unit tests'",
+    "start": "npx serve . -p 3300",
+    "dev": "npx serve . -p 3300"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/Ashish200408/EcoPersona-AI.git"
   },
-  "keywords": [],
-  "author": "",
+  "keywords": [
+    "sustainability",
+    "eco",
+    "carbon-footprint",
+    "climate",
+    "habit-tracker",
+    "assessment"
+  ],
+  "author": "Ashish Mishra",
   "license": "ISC",
   "type": "commonjs",
   "bugs": {

@@ -237,8 +237,12 @@ const Store = {
     return this.set(key, { ...current, ...partial });
   },
 
-  /** Remove a single key. */
+  /**
+   * Remove a single key from both the in-memory cache and localStorage.
+   * @param {string} key
+   */
   remove(key) {
+    if (!key) return;
     localStorage.removeItem(CONFIG.STORAGE_PREFIX + key);
     this._cache.delete(key);
   }
@@ -315,8 +319,17 @@ const Utils = {
       .replace(/'/g, '&#39;');
   },
 
-  /** Clamp a number between min and max. */
-  clamp(v, min, max) { return Math.min(Math.max(v, min), max); },
+  /**
+   * Clamp a number between min and max (inclusive).
+   * @param {number} v   — value to clamp
+   * @param {number} min — lower bound
+   * @param {number} max — upper bound
+   * @returns {number}
+   */
+  clamp(v, min, max) {
+    if (typeof v !== 'number' || isNaN(v)) return min;
+    return Math.min(Math.max(v, min), max);
+  },
 
   /**
    * Announce text to screen readers.
@@ -591,7 +604,6 @@ const StatsCards = {
 
     const challengeProgress = Store.get('challenge_progress') || {};
     const badgesEarned = Store.get('badges_earned') || [];
-    document.getElementById('badges-count')?.setAttribute && null;
     const badgesCountEl = document.getElementById('badges-count');
     if (badgesCountEl) badgesCountEl.textContent = badgesEarned.length;
 
